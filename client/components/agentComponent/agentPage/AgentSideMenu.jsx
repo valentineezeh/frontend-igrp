@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-class SideMenu extends React.Component {
+class AgentSideMenu extends React.Component {
   render() {
     const { agents } = this.props.allAgents;
     const driverLength = this.props.allDrivers.length;
@@ -39,4 +39,4 @@ class SideMenu extends React.Component {
   }
 }
 
-export default SideMenu;
+export default AgentSideMenu;

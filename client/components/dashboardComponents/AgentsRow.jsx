@@ -6,7 +6,7 @@ const AgentsRow = props => {
     <tr>
       <td>{props.agents.fullname}</td>
       <td>{props.agents.email}</td>
-      <td>{moment(props.agents.date).format("MMMM-DD-YY")}</td>
+      <td>{moment(props.agents.date).format("MMM-DD-YY")}</td>
     </tr>
   );
 };

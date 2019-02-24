@@ -136,6 +136,7 @@ class LoginForm extends React.Component {
         </div>
       </div>
     );
+
     return <div>{form}</div>;
   }
 }

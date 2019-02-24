@@ -14,6 +14,7 @@ body {
   padding-top: 6px !important;
   padding-bottom: 0 !important;
   height: 33px;
+  color: whitesmoke;
 }
 
 .navbar-default {
@@ -21,7 +22,7 @@ body {
   border-color: #c0392b;
 }
 .navbar-default .navbar-brand {
-  color: #ecf0f1;
+  color: whitesmoke;
 }
 .navbar-default .navbar-brand:hover,
 .navbar-default .navbar-brand:focus {
@@ -68,6 +69,21 @@ body {
 }
 .navbar-default .navbar-link:hover {
   color: #ffbbbc;
+}
+
+.loader {
+  width: 100px;
+  height: 101px;
+  border: 8px solid;
+  border-top-color: hsl(154, 100%, 31%);
+  border-left-color: hsl(216, 87%, 52%);
+  border-bottom-color: hsl(8, 66%, 50%);
+  border-right-color: hsl(42, 100%, 51%);
+  border-radius: 50%;
+  transform: rotate(45deg);
+  margin: 50vh auto;
+  background-color: transparent;
+  animation: loading 1s linear infinite;
 }
 
 /* Custom */

@@ -3,6 +3,7 @@ import AgentsRow from "./AgentsRow.jsx";
 
 class LatestAgent extends React.Component {
   render() {
+    const { agents } = this.props.allAgents;
     return (
       <div className="panel panel-default">
         <div className="panel-heading">
@@ -18,7 +19,7 @@ class LatestAgent extends React.Component {
               </tr>
             </thead>
             <tbody>
-              {this.props.allAgents.map(agents => (
+              {agents.map(agents => (
                 <AgentsRow key={agents.id} agents={agents} />
               ))}
             </tbody>
