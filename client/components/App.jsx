@@ -5,6 +5,7 @@ import FooterBar from "./FooterBar.jsx";
 import LoginForm from "./login/LoginForm.jsx";
 import Dashboard from "./dashboardComponents/Dashboard.jsx";
 import AgentPage from "./agentComponent/agentPage/AgentPage.jsx";
+import Agents from "./agentComponent/agentForm/Agents.jsx";
 import DriverPage from "./driversComponent/driverPage/DriverPage.jsx";
 import Transactions from "./transactionsComponent/Transactions.jsx";
 import privateRoute from "../utils/privateRoute";
@@ -19,7 +20,12 @@ class App extends React.Component {
           <Route exact path="/dashboard" component={privateRoute(Dashboard)} />
           <Route exact path="/drivers" component={privateRoute(DriverPage)} />
           <Route exact path="/agents" component={privateRoute(AgentPage)} />
-          <Route exact path="/transactions" component={Transactions} />
+          <Route exact path="/create-agent" component={privateRoute(Agents)} />
+          <Route
+            exact
+            path="/transactions"
+            component={privateRoute(Transactions)}
+          />
         </div>
         <FooterBar />
       </div>
