@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-class SideMenu extends React.Component {
+class DriverSideMenu extends React.Component {
   render() {
     const { agents } = this.props.allAgents;
     const driverLength = this.props.allDrivers.length;
@@ -10,10 +10,7 @@ class SideMenu extends React.Component {
       <div>
         <div class="col-md-3">
           <div className="list-group">
-            <Link
-              to="/dashboard"
-              className="list-group-item active main-color-bg"
-            >
+            <Link to="/" className="list-group-item active main-color-bg">
               <span className="glyphicon glyphicon-cog" aria-hidden="true" />{" "}
               Dashboard
             </Link>
@@ -28,7 +25,7 @@ class SideMenu extends React.Component {
               <span className="badge">{driverLength}</span>
             </Link>
 
-            <Link to="transactions" className="list-group-item">
+            <Link to="/transactions" className="list-group-item">
               <i class="far fa-newspaper" /> Transactions
               <span className="badge">{transactionLength}</span>
             </Link>
@@ -39,4 +36,4 @@ class SideMenu extends React.Component {
   }
 }
 
-export default SideMenu;
+export default DriverSideMenu;

@@ -4,8 +4,8 @@ import Header from "./Header.jsx";
 import FooterBar from "./FooterBar.jsx";
 import LoginForm from "./login/LoginForm.jsx";
 import Dashboard from "./dashboardComponents/Dashboard.jsx";
-import Drivers from "./driversComponent/Drivers.jsx";
-import Agents from "./agentComponent/Agents.jsx";
+import AgentPage from "./agentComponent/agentPage/AgentPage.jsx";
+import DriverPage from "./driversComponent/driverPage/DriverPage.jsx";
 import Transactions from "./transactionsComponent/Transactions.jsx";
 import privateRoute from "../utils/privateRoute";
 
@@ -17,8 +17,8 @@ class App extends React.Component {
         <div>
           <Route exact path="/" component={LoginForm} />
           <Route exact path="/dashboard" component={privateRoute(Dashboard)} />
-          <Route exact path="/drivers" component={Drivers} />
-          <Route exact path="/agents" component={Agents} />
+          <Route exact path="/drivers" component={privateRoute(DriverPage)} />
+          <Route exact path="/agents" component={privateRoute(AgentPage)} />
           <Route exact path="/transactions" component={Transactions} />
         </div>
         <FooterBar />
