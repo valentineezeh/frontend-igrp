@@ -3,7 +3,31 @@ import AgentSideMenu from "./AgentSideMenu.jsx";
 import AgentForm from "./AgentForm.jsx";
 
 class Agents extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoading: false
+    };
+    this.agentCallBack = this.agentCallBack.bind(this);
+  }
+  agentCallBack(dataFromAgentForm) {
+    this.setState({
+      isLoading: dataFromAgentForm
+    });
+  }
   render() {
+    const { isLoading } = this.state;
+
+    if (isLoading) {
+      return (
+        <div>
+          <div className="loadercontainer">
+            <div className="loading" />
+          </div>
+        </div>
+      );
+    }
+
     const agent = (
       <div>
         <header id="header">
@@ -33,7 +57,7 @@ class Agents extends React.Component {
           <div className="container">
             <div className="row">
               <AgentSideMenu />
-              <AgentForm />
+              <AgentForm agentCallBack={this.agentCallBack} />
             </div>
           </div>
         </section>

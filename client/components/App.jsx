@@ -7,6 +7,7 @@ import Dashboard from "./dashboardComponents/Dashboard.jsx";
 import AgentPage from "./agentComponent/agentPage/AgentPage.jsx";
 import Agents from "./agentComponent/agentForm/Agents.jsx";
 import DriverPage from "./driversComponent/driverPage/DriverPage.jsx";
+import Drivers from "./driversComponent/driverForm/Drivers.jsx";
 import Transactions from "./transactionsComponent/Transactions.jsx";
 import privateRoute from "../utils/privateRoute";
 
@@ -21,6 +22,11 @@ class App extends React.Component {
           <Route exact path="/drivers" component={privateRoute(DriverPage)} />
           <Route exact path="/agents" component={privateRoute(AgentPage)} />
           <Route exact path="/create-agent" component={privateRoute(Agents)} />
+          <Route
+            exact
+            path="/create-driver"
+            component={privateRoute(Drivers)}
+          />
           <Route
             exact
             path="/transactions"

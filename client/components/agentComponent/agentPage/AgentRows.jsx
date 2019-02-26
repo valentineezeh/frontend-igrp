@@ -16,7 +16,7 @@ const AgentsRow = props => {
       <td>{props.agents.age}</td>
       <td>{props.agents.role}</td>
       <td>{props.agents.deactivate}</td>
-      <td>{moment(props.agents.date).format("MMM-DD-YY")}</td>
+      <td>{moment(props.agents.date).format("MM-DD-YY")}</td>
     </tr>
   );
 };
