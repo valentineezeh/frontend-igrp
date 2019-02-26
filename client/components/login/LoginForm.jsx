@@ -74,12 +74,26 @@ class LoginForm extends React.Component {
     }
   }
 
+  componentDidMount() {
+    this.setState({ isLoading: false });
+  }
+
   render() {
-    const { errors, phoneNumber, password } = this.state;
+    const { errors, phoneNumber, password, isLoading } = this.state;
     const { auth } = this.props;
 
     if (auth) {
       return <Redirect to="/dashboard" />;
+    }
+
+    if (isLoading) {
+      return (
+        <div>
+          <div className="loadercontainer">
+            <div className="loading" />
+          </div>
+        </div>
+      );
     }
 
     const form = (

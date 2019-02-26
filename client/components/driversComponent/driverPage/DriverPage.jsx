@@ -41,7 +41,7 @@ class DriverPage extends React.Component {
               </li>
               <li>
                 {" "}
-                <Link className="btn btn-danger btn-sm " to="create-agent">
+                <Link className="btn btn-danger btn-sm " to="create-driver">
                   Create Driver
                 </Link>
               </li>

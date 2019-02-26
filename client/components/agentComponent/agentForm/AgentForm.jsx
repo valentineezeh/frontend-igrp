@@ -30,6 +30,10 @@ class AgentForm extends React.Component {
     this.onChange = this.onChange.bind(this);
   }
 
+  componentDidMount() {
+    this.setState({ isLoading: false });
+  }
+
   /**
    *
    * @param {*} event
@@ -68,6 +72,7 @@ class AgentForm extends React.Component {
     event.preventDefault();
     if (this.isValid()) {
       this.setState({ errors: {}, isLoading: true });
+      this.props.agentCallBack(this.state.isLoading);
       this.props.agentRequest(this.state);
     }
   }
