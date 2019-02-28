@@ -5,6 +5,10 @@ import allDrivers from './drivers';
 import allTransactions from './transactions';
 import postAgent from './postAgent';
 import postDriverReducer from './createDriver';
+import singleAgentRequests from './singleAgent';
+import agentActivateRequest from './activateAgent';
+import agentDeactivateRequest from './deactivateAgent';
+import singleAgentAllTransaction from './agentTransactions';
 
 export default combineReducers({
     auth,
@@ -12,5 +16,9 @@ export default combineReducers({
     allDrivers,
     allTransactions,
     postAgent,
-    postDriverReducer
+    postDriverReducer,
+    singleAgentRequests,
+    agentActivateRequest,
+    agentDeactivateRequest,
+    singleAgentAllTransaction
 });

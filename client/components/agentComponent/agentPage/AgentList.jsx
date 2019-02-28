@@ -17,14 +17,9 @@ class AgentList extends React.Component {
                   <tr>
                     <th scope="col">Name</th>
                     <th scope="col">Phone</th>
-                    <th scope="col">Address</th>
-                    <th scope="col">BVN</th>
-                    <th scope="col">NIMC</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Age</th>
-                    <th scope="col">Role</th>
-                    <th scope="col">Status</th>
+                    <th scope="col">Deactivate</th>
                     <th scope="col">Joined</th>
+                    <th scope="col">View</th>
                   </tr>
                 </thead>
                 <tbody>

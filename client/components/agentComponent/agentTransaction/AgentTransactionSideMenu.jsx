@@ -1,30 +1,36 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-class AgentSideMenu extends React.Component {
+class AgentTransactionSideMenu extends React.Component {
   render() {
+    const { agents } = this.props.allAgents;
+    const driverLength = this.props.allDrivers.length;
+    const transactionLength = this.props.allTransactions.length;
     return (
       <div>
         <div class="col-md-3">
           <div className="list-group">
-            <Link to="/" className="list-group-item active main-color-bg">
+            <Link
+              to="/dashboard"
+              className="list-group-item active main-color-bg"
+            >
               <span className="glyphicon glyphicon-cog" aria-hidden="true" />{" "}
               Dashboard
             </Link>
 
-            <Link to="/agents" className="list-group-item" id="agent">
+            <Link to="/agents" className="list-group-item">
               <i className="fas fa-users" /> Agents{" "}
-              <span className="badge">12</span>
+              <span className="badge">{agents.length}</span>
             </Link>
 
             <Link to="/drivers" className="list-group-item">
               <i className="fas fa-truck" /> Drivers{" "}
-              <span className="badge">33</span>
+              <span className="badge">{driverLength}</span>
             </Link>
 
             <Link to="transactions" className="list-group-item">
               <i class="far fa-newspaper" /> Transactions
-              <span className="badge">203</span>
+              <span className="badge">{transactionLength}</span>
             </Link>
           </div>
         </div>
@@ -33,4 +39,4 @@ class AgentSideMenu extends React.Component {
   }
 }
 
-export default AgentSideMenu;
+export default AgentTransactionSideMenu;
