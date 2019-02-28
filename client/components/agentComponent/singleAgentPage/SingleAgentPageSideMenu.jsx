@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
-class TransactionSideMenu extends React.Component {
+class SingleAgentPageSideMenu extends React.Component {
   render() {
     const { agents } = this.props.allAgents;
     const driverLength = this.props.allDrivers.length;
@@ -18,7 +19,7 @@ class TransactionSideMenu extends React.Component {
               Dashboard
             </Link>
 
-            <Link to="/agents" className="list-group-item" id="agent">
+            <Link to="/agents" className="list-group-item">
               <i className="fas fa-users" /> Agents{" "}
               <span className="badge">{agents.length}</span>
             </Link>
@@ -39,4 +40,12 @@ class TransactionSideMenu extends React.Component {
   }
 }
 
-export default TransactionSideMenu;
+const mapStateToProps = state => {
+  return {
+    allAgents: state.allAgents,
+    allDrivers: state.allDrivers,
+    allTransactions: state.allTransactions
+  };
+};
+
+export default connect(mapStateToProps)(SingleAgentPageSideMenu);

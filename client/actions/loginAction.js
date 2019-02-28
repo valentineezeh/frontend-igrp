@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 import Cookie from 'cookies-js';
 import toastr from 'toastr';
 import config from '../config/index.js';
-import { SET_CURRENT_USER, SET_CURRENT_USER_FAIL, DELETE_ERROR_MESSAGE} from '../actions/types';
+import { SET_CURRENT_USER, SET_CURRENT_USER_FAIL, DELETE_ERROR_MESSAGE} from './types';
 import routes from '../constants/routes.js';
 
 export const setCurrentUser = user => ({

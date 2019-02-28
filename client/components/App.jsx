@@ -10,6 +10,8 @@ import DriverPage from "./driversComponent/driverPage/DriverPage.jsx";
 import Drivers from "./driversComponent/driverForm/Drivers.jsx";
 import Transactions from "./transactionsComponent/Transactions.jsx";
 import privateRoute from "../utils/privateRoute";
+import SingleAgentPage from "./agentComponent/singleAgentPage/SingleAgentPage.jsx";
+import AgentTransactionPage from "./agentComponent/agentTransaction/AgentTransactionPage.jsx";
 
 class App extends React.Component {
   render() {
@@ -31,6 +33,16 @@ class App extends React.Component {
             exact
             path="/transactions"
             component={privateRoute(Transactions)}
+          />
+          <Route
+            exact
+            path="/single-agent"
+            component={privateRoute(SingleAgentPage)}
+          />
+          <Route
+            exact
+            path="/agent-transactions"
+            component={privateRoute(AgentTransactionPage)}
           />
         </div>
         <FooterBar />

@@ -12,7 +12,7 @@ export const allTransactions = (transactions) => {
 
 const fetchTransactions = () => {
     return dispatch => {
-        return axios.get(`${config.apiUrl}${routes.DRIVERS}`).then(response => {
+        return axios.get(`${config.apiUrl}${routes.TRANSACTIONS}`).then(response => {
             dispatch(allTransactions(response.data.data));
         }).catch(error => {
             throw(error);
