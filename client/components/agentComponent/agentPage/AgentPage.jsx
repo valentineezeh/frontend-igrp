@@ -2,30 +2,31 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import TransactionSideMenu from "./TransactionSideMenu.jsx";
-import TransactionList from "./TransactionList.jsx";
-import fetchAgents, { fetchAgentsMessage } from "../../actions/agentsAction";
-import fetchDrivers from "../../actions/driversAction";
-import fetchTransactions from "../../actions/transactionsAction";
+import AgentSideMenu from "./AgentSideMenu.jsx";
+import AgentList from "./AgentList.jsx";
+import fetchAgents from "../../../actions/agentsAction";
+import fetchDrivers from "../../../actions/driversAction";
+import fetchTransactions from "../../../actions/transactionsAction";
 
-class Transactions extends React.Component {
+class AgentPage extends React.Component {
   componentDidMount() {
-    this.props.fetchAgentsMessage();
-    this.props.fetchAgents();
     this.props.fetchDrivers();
     this.props.fetchTransactions();
   }
 
+  componentWillMount() {
+    this.props.fetchAgents();
+  }
+
   render() {
-    const transaction = (
+    const agentDashboard = (
       <div>
         <header id="header">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-10">
+          <div className="container">
+            <div className="row">
+              <div className="col-md-10">
                 <h1>
-                  <span class="glyphicon glyphicon-cog" aria-hidden="true" />{" "}
-                  <small>Transactions</small>
+                  <span className="fa fa-cog" aria-hidden="true" /> Agent
                 </h1>
               </div>
             </div>
@@ -38,39 +39,39 @@ class Transactions extends React.Component {
               <li>
                 <Link to="/dashboard">Dashboard</Link>
               </li>
-              <li class="active">Transactions</li>
+              <li>
+                {" "}
+                <Link className="btn btn-danger btn-sm " to="create-agent">
+                  Create Agent
+                </Link>
+              </li>
             </ol>
           </div>
         </section>
         <section>
           <div className="container">
             <div className="row">
-              <TransactionSideMenu
+              <AgentSideMenu
                 allAgents={this.props.allAgents}
                 allDrivers={this.props.allDrivers}
                 allTransactions={this.props.allTransactions}
               />
-              <TransactionList
-                allAgents={this.props.allAgents}
-                allDrivers={this.props.allDrivers}
-                allTransactions={this.props.allTransactions}
-              />
+              <AgentList allAgents={this.props.allAgents} />
             </div>
           </div>
         </section>
       </div>
     );
-    return <div>{transaction}</div>;
+    return <div>{agentDashboard}</div>;
   }
 }
 
-Transactions.propTypes = {
+AgentPage.propTypes = {
   allAgents: PropTypes.shape({}).isRequired,
-  allDrivers: PropTypes.array.isRequired,
-  allTransactions: PropTypes.array.isRequired,
+  allDrivers: PropTypes.shape({}).isRequired,
+  allTransactions: PropTypes.shape({}).isRequired,
   fetchAgents: PropTypes.func.isRequired,
   fetchDrivers: PropTypes.func.isRequired,
-  fetchAgentsMessage: PropTypes.func.isRequired,
   fetchTransactions: PropTypes.func.isRequired
 };
 
@@ -82,7 +83,13 @@ const mapStateToProps = state => {
   };
 };
 
+const mapDispatchToProps = dispatch => ({
+  fetchAgents: () => dispatch(fetchAgents()),
+  fetchDrivers: () => dispatch(fetchDrivers()),
+  fetchTransactions: () => dispatch(fetchTransactions())
+});
+
 export default connect(
   mapStateToProps,
-  { fetchAgents, fetchDrivers, fetchTransactions, fetchAgentsMessage }
-)(Transactions);
+  mapDispatchToProps
+)(AgentPage);

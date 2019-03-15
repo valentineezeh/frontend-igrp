@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-class TransactionSideMenu extends React.Component {
+class AgentTransactionSideMenu extends React.Component {
   render() {
     const { agents } = this.props.allAgents;
     const driverLength = this.props.allDrivers.length;
@@ -18,7 +18,7 @@ class TransactionSideMenu extends React.Component {
               Dashboard
             </Link>
 
-            <Link to="/agents" className="list-group-item" id="agent">
+            <Link to="/agents" className="list-group-item">
               <i className="fas fa-users" /> Agents{" "}
               <span className="badge">{agents.length}</span>
             </Link>
@@ -39,4 +39,4 @@ class TransactionSideMenu extends React.Component {
   }
 }
 
-export default TransactionSideMenu;
+export default AgentTransactionSideMenu;

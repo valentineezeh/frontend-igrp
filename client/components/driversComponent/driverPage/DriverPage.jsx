@@ -2,30 +2,31 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import TransactionSideMenu from "./TransactionSideMenu.jsx";
-import TransactionList from "./TransactionList.jsx";
-import fetchAgents, { fetchAgentsMessage } from "../../actions/agentsAction";
-import fetchDrivers from "../../actions/driversAction";
-import fetchTransactions from "../../actions/transactionsAction";
+import DriverSideMenu from "./DriverSideMenu.jsx";
+import DriverList from "./DriverList.jsx";
+import fetchAgents from "../../../actions/agentsAction";
+import fetchDrivers from "../../../actions/driversAction";
+import fetchTransactions from "../../../actions/transactionsAction";
 
-class Transactions extends React.Component {
+class DriverPage extends React.Component {
   componentDidMount() {
-    this.props.fetchAgentsMessage();
     this.props.fetchAgents();
     this.props.fetchDrivers();
     this.props.fetchTransactions();
   }
-
   render() {
-    const transaction = (
+    const driverDashboard = (
       <div>
         <header id="header">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-10">
+          <div className="container">
+            <div className="row">
+              <div className="col-md-10">
                 <h1>
-                  <span class="glyphicon glyphicon-cog" aria-hidden="true" />{" "}
-                  <small>Transactions</small>
+                  <span
+                    className="glyphicon glyphicon-cog"
+                    aria-hidden="true"
+                  />
+                  Dashboard <small>Manage Your Site</small>
                 </h1>
               </div>
             </div>
@@ -36,21 +37,26 @@ class Transactions extends React.Component {
           <div class="container">
             <ol class="breadcrumb">
               <li>
-                <Link to="/dashboard">Dashboard</Link>
+                <a href="index.html">Dashboard</a>
               </li>
-              <li class="active">Transactions</li>
+              <li>
+                {" "}
+                <Link className="btn btn-danger btn-sm " to="create-driver">
+                  Create Driver
+                </Link>
+              </li>
             </ol>
           </div>
         </section>
         <section>
           <div className="container">
             <div className="row">
-              <TransactionSideMenu
+              <DriverSideMenu
                 allAgents={this.props.allAgents}
                 allDrivers={this.props.allDrivers}
                 allTransactions={this.props.allTransactions}
               />
-              <TransactionList
+              <DriverList
                 allAgents={this.props.allAgents}
                 allDrivers={this.props.allDrivers}
                 allTransactions={this.props.allTransactions}
@@ -60,17 +66,16 @@ class Transactions extends React.Component {
         </section>
       </div>
     );
-    return <div>{transaction}</div>;
+    return <div>{driverDashboard}</div>;
   }
 }
 
-Transactions.propTypes = {
-  allAgents: PropTypes.shape({}).isRequired,
+DriverPage.propTypes = {
+  allAgents: PropTypes.array.isRequired,
   allDrivers: PropTypes.array.isRequired,
   allTransactions: PropTypes.array.isRequired,
   fetchAgents: PropTypes.func.isRequired,
   fetchDrivers: PropTypes.func.isRequired,
-  fetchAgentsMessage: PropTypes.func.isRequired,
   fetchTransactions: PropTypes.func.isRequired
 };
 
@@ -84,5 +89,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { fetchAgents, fetchDrivers, fetchTransactions, fetchAgentsMessage }
-)(Transactions);
+  { fetchAgents, fetchDrivers, fetchTransactions }
+)(DriverPage);

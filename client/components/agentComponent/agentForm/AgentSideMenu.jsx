@@ -12,17 +12,17 @@ class AgentSideMenu extends React.Component {
               Dashboard
             </Link>
 
-            <Link to="/agent" className="list-group-item" id="agent">
+            <Link to="/agents" className="list-group-item" id="agent">
               <i className="fas fa-users" /> Agents{" "}
               <span className="badge">12</span>
             </Link>
 
-            <Link to="/driver" className="list-group-item">
+            <Link to="/drivers" className="list-group-item">
               <i className="fas fa-truck" /> Drivers{" "}
               <span className="badge">33</span>
             </Link>
 
-            <Link to="transaction.html" className="list-group-item">
+            <Link to="transactions" className="list-group-item">
               <i class="far fa-newspaper" /> Transactions
               <span className="badge">203</span>
             </Link>

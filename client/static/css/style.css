@@ -89,6 +89,12 @@ body {
   padding-top: 20px;
 }
 
+#anchor {
+  color: whitesmoke;
+  font-size: 16px;
+  font-weight: bold;
+}
+
 /* Breadcrumb */
 .breadcrumb {
   background: #cccccc;
@@ -115,6 +121,19 @@ body {
 
 .agent-style {
   margin-top: 15px;
+}
+
+#activate {
+  display: inline;
+}
+
+#singleagentoverview {
+  margin-top: -20px;
+}
+
+#deactivate {
+  display: inline;
+  margin-left: 75%;
 }
 /* Footer */
 #footer {
