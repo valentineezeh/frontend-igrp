@@ -6,10 +6,16 @@ import moment from "../../../middleware/moment";
 import activateAgent from "../../../actions/activateAgentAction";
 import deactivateAgent from "../../../actions/deactivateAgentAction";
 import agentTransactions from "../../../actions/agentTransactionsAction";
+import IsLoading from '../../commons/IsLoading.jsx';
 
 class SingleAgentOverview extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      isLoading1: false,
+      isLoading2: false,
+      isLoading3: false
+    }
     this.onActivate = this.onActivate.bind(this);
     this.onDeactivate = this.onDeactivate.bind(this);
     this.onAgentTransaction = this.onAgentTransaction.bind(this);
@@ -17,11 +23,13 @@ class SingleAgentOverview extends React.Component {
 
   onActivate(event) {
     event.preventDefault();
+    this.setState({ isLoading1: true })
     return this.props.activateAgent(this.props.singleAgent.phoneNumber);
   }
 
   onDeactivate(event) {
     event.preventDefault();
+    this.setState({ isLoading2: true })
     return this.props.deactivateAgent(this.props.singleAgent.phoneNumber);
   }
 
@@ -33,13 +41,33 @@ class SingleAgentOverview extends React.Component {
   render() {
     const agentStatus = this.props.singleAgent.deactivate;
     const convertedStatus = "" + agentStatus;
-
+    const {
+      isLoading1,
+      isLoading2,
+      isLoading3
+    } = this.state
     const { activateStatus, deactivateStatus } = this.props;
 
-    console.log("---->", activateStatus, deactivateStatus);
-
-    if (activateStatus || deactivateStatus) {
+    if (activateStatus) {
       return (location.href = "/agents");
+    }
+    if (isLoading1) {
+      return (
+        <div >
+          <IsLoading />
+        </div>
+      )
+    }
+
+    if (deactivateStatus) {
+      return (location.href = "/agents")
+    }
+    if (isLoading2) {
+      return (
+        <div>
+          <IsLoading />
+        </div>
+      )
     }
 
     return (
@@ -173,9 +201,9 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  activateAgent: () => dispatch(activateAgent()),
-  deactivateAgent: () => dispatch(deactivateAgent()),
-  agentTransactions: () => dispatch(agentTransactions())
+  activateAgent: (phoneNumber) => dispatch(activateAgent(phoneNumber)),
+  deactivateAgent: (phoneNumber) => dispatch(deactivateAgent(phoneNumber)),
+  agentTransactions: (phoneNumber) => dispatch(agentTransactions(phoneNumber))
 });
 
 export default connect(

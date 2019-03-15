@@ -13,7 +13,6 @@ const TextField = ({
 }) => (
   <div className={classnames({ "text-danger": error })}>
     <input
-      className="form-control"
       type={type}
       name={field}
       value={value}
@@ -21,6 +20,7 @@ const TextField = ({
       placeholder={placeholder}
       id={id}
       required
+      className="form-control"
     />
     {error && <p className="text-danger">{error}</p>}
   </div>
