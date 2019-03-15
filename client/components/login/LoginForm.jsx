@@ -6,6 +6,7 @@ import TextField from "../commons/TextField.jsx";
 import validateInput from "../../middleware/loginValidate";
 import SubmitButton from "../commons/SubmitButton.jsx";
 import userLoginRequest from "../../actions/loginAction.js";
+import IsLoading from '../commons/IsLoading.jsx';
 
 /**
  * @class LoginForm
@@ -74,10 +75,6 @@ class LoginForm extends React.Component {
     }
   }
 
-  componentDidMount() {
-    this.setState({ isLoading: false });
-  }
-
   render() {
     const { errors, phoneNumber, password, isLoading } = this.state;
     const { auth } = this.props;
@@ -89,65 +86,58 @@ class LoginForm extends React.Component {
     if (isLoading) {
       return (
         <div>
-          <div className="loadercontainer">
-            <div className="loading" />
-          </div>
+            <IsLoading />
         </div>
       );
     }
 
     const form = (
-      <div>
+      <div className="hero-image">
         <header id="header">
           <div className="container">
             <div className="row">
               <div className="col-md-12">
-                <h1 className="text-center">
+                <h2 className="text-center">
                   Admin Area <br />
                   <small>Account Login</small>
-                </h1>
+                </h2>
               </div>
             </div>
           </div>
         </header>
-        <div className="container" id="main">
-          <div className="row">
-            <div className="col-md-4 col-md-offset-4">
-              <form id="login" className="well">
-                <div className="form-group">
-                  <label>Phone Number</label>
-                  <TextField
+        <div className="login-page">
+          <div className="form">
+            <form class="login-form">
+            <h2>Login Form</h2>
+            <hr />
+              <TextField
                     error={errors.phoneNumber}
                     onChange={this.onChange}
                     type="text"
                     placeholder="Enter Phone Number"
                     value={phoneNumber}
                     field="phoneNumber"
-                    className="myphonenumber"
+                    className="loginInput"
                   />
-                </div>
-                <div className="form-group">
-                  <label>Password</label>
                   <TextField
                     error={errors.password}
                     onChange={this.onChange}
                     type="password"
-                    className="mypassword"
                     placeholder="Password"
                     value={password}
                     field="password"
+                    className="loginInput"
                   />
-                </div>
-                <SubmitButton
-                  type="submit"
+               <SubmitButton
+                  type="button"
                   className="btn btn-default btn-block"
                   onClick={this.onSubmit}
                   label="Login"
                 />
-              </form>
-            </div>
-          </div>
-        </div>
+               <p class="message">Welcome Admin! <a href="#">Please use the above form to access the dashboard</a></p>
+    </form>
+  </div>
+</div>
       </div>
     );
 

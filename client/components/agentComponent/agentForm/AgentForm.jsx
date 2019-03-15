@@ -6,6 +6,7 @@ import TextField from "../../commons/TextField.jsx";
 import validateInput from "../../../middleware/agentInputValidate";
 import SubmitButton from "../../commons/SubmitButton.jsx";
 import agentRequest from "../../../actions/postAgentsAction";
+import IsLoading from '../../commons/IsLoading.jsx';
 
 /**
  * @class AgentForm
@@ -87,13 +88,22 @@ class AgentForm extends React.Component {
       fullname,
       bvn,
       nimc,
-      age
+      age,
+      isLoading
     } = this.state;
 
     const { status } = this.props;
 
     if (status) {
       return <Redirect to="/agents" />;
+    }
+
+    if (isLoading) {
+      return (
+        <div>
+            <IsLoading />
+        </div>
+      );
     }
 
     const agentForm = (
@@ -114,7 +124,7 @@ class AgentForm extends React.Component {
                       value={phoneNumber}
                       field="phoneNumber"
                       type="text"
-                      className="myphonenumber"
+                      className="form-control"
                       placeholder="Phone Number"
                     />
                   </div>
