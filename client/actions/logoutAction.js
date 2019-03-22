@@ -7,6 +7,7 @@ export const logoutCurrentUser = () => ({
 
 const logoutAction = () => (dispatch) => {
     Cookie.expire('jwtToken');
+    Cookie.expire('phoneNumber');
     dispatch(logoutCurrentUser({}));
 };
 

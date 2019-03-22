@@ -3,8 +3,20 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import AgentTransactionSideMenu from "./AgentTransactionSideMenu.jsx";
+import AgentTransactionTable from './AgentTransactionTable.jsx'
+import fetchAgents from '../../../actions/agentsAction';
+import fetchDrivers from '../../../actions/driversAction';
+import fetchTransactions from '../../../actions/transactionsAction';
 
 class AgentTransactionPage extends React.Component {
+  componentDidMount() {
+    this.props.fetchDrivers();
+    this.props.fetchTransactions();
+  }
+
+  componentWillMount() {
+    this.props.fetchAgents();
+  }
   render() {
     const singleAgentTransactions = (
       <div>
@@ -38,6 +50,7 @@ class AgentTransactionPage extends React.Component {
                 allDrivers={this.props.allDrivers}
                 allTransactions={this.props.allTransactions}
               />
+              <AgentTransactionTable />
             </div>
           </div>
         </section>
@@ -60,4 +73,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(AgentTransactionPage);
+export default connect(mapStateToProps, { fetchAgents, fetchDrivers, fetchTransactions })(AgentTransactionPage);

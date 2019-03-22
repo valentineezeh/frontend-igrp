@@ -2,7 +2,7 @@ import isEmpty from 'is-empty';
 import validator from 'validator';
 
 
-export default function validateInput(data){
+export default function updateAgentInput(data){
     let errors = {};
     if(!validator.isEmail(data.email)){
         errors.email = 'Invalid Email';
@@ -61,11 +61,18 @@ export default function validateInput(data){
         errors.nimc = 'This field can not be blank';
     }
 
-    if(data.driverLicence == ''){
-        errors.driverLicence = 'This field is required';
+    if(data.driverLicense == ''){
+        errors.driverLicense = 'This field is required';
     }
-    if (!data.driverLicence || data.driverLicence.trim().length === 0) {
-        errors.driverLicence = 'This field can not be blank';
+    if (!data.driverLicense || data.driverLicense.trim().length === 0) {
+        errors.driverLicense = 'This field can not be blank';
+    }
+
+    if(data.imenumber == ''){
+        errors.imenumber = 'This field is required';
+    }
+    if (!data.imenumber || data.imenumber.trim().length === 0) {
+        errors.imenumber = 'This field can not be blank';
     }
 
     return{

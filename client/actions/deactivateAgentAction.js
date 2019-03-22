@@ -4,7 +4,7 @@ import config from '../config/index';
 import { DEACTIVATE_AGENT_REQUEST } from './types';
 import routes from '../constants/routes';
 
-export const agentDeactivate = (deactivate) => {
+export const deactivateAgentRequest = (deactivate) => {
     return {
         type: DEACTIVATE_AGENT_REQUEST,
         deactivate
@@ -18,7 +18,7 @@ const deactivateAgent = phoneNumber => (dispatch) => {
     return axios.patch(`${config.apiUrl}${routes.DEACTIVATEAGENT}`, agentPhoneNumber).then(
         response => {
             const { message } = response.data;
-            dispatch(deactivateAgent(message));
+            dispatch(deactivateAgentRequest(message));
             toastr.success(message);
         }
     ).catch( error => {

@@ -7,6 +7,7 @@ import activateAgent from "../../../actions/activateAgentAction";
 import deactivateAgent from "../../../actions/deactivateAgentAction";
 import agentTransactions from "../../../actions/agentTransactionsAction";
 import IsLoading from '../../commons/IsLoading.jsx';
+import deleteAgentRequest from '../../../actions/deleteAgentAction';
 
 class SingleAgentOverview extends React.Component {
   constructor(props) {
@@ -14,11 +15,13 @@ class SingleAgentOverview extends React.Component {
     this.state = {
       isLoading1: false,
       isLoading2: false,
-      isLoading3: false
+      isLoading3: false,
+      isLoading4: false
     }
     this.onActivate = this.onActivate.bind(this);
     this.onDeactivate = this.onDeactivate.bind(this);
     this.onAgentTransaction = this.onAgentTransaction.bind(this);
+    this.onDeleteAgent = this.onDeleteAgent.bind(this);
   }
 
   onActivate(event) {
@@ -38,18 +41,26 @@ class SingleAgentOverview extends React.Component {
     return this.props.agentTransactions(this.props.singleAgent.phoneNumber);
   }
 
+  onDeleteAgent(event) {
+    event.preventDefault();
+    this.setState({ isLoading3: true })
+    return this.props.deleteAgentRequest(this.props.singleAgent.phoneNumber);
+  }
+
+
   render() {
     const agentStatus = this.props.singleAgent.deactivate;
     const convertedStatus = "" + agentStatus;
     const {
       isLoading1,
       isLoading2,
-      isLoading3
+      isLoading3,
+      isLoading4
     } = this.state
-    const { activateStatus, deactivateStatus } = this.props;
+    const { activateStatus, deactivateStatus, deleteSuccess, success } = this.props;
 
     if (activateStatus) {
-      return (location.href = "/agents");
+      window.location.href = "/agents";
     }
     if (isLoading1) {
       return (
@@ -60,9 +71,32 @@ class SingleAgentOverview extends React.Component {
     }
 
     if (deactivateStatus) {
-      return (location.href = "/agents")
+      window.location.href = "/agents"
     }
     if (isLoading2) {
+      return (
+        <div>
+          <IsLoading />
+        </div>
+      )
+    }
+
+    if (deleteSuccess) {
+      window.location.href = "/agents"
+    }
+    if (isLoading3) {
+      return (
+        <div>
+          <IsLoading />
+        </div>
+      )
+    }
+
+    if (success) {
+      window.location.href = '/agent-transactions'
+    }
+
+    if (isLoading4) {
       return (
         <div>
           <IsLoading />
@@ -77,32 +111,40 @@ class SingleAgentOverview extends React.Component {
           <div className="panel-heading main-color-bg">
             <div className="row">
               <div className="col-md-4">
-                <a id="anchor" className="btn btn-white" href="#" role="button">
-                  <i className="fa fa-male">Agent Details</i>
-                </a>
-              </div>
-
-              <div className="col-md-4">
-                <Link
-                  id="anchor"
-                  className="btn btn-white"
-                  to="/agent-transactions"
+                <Link 
+                  id="anchor" 
+                  className="btn btn-white" 
+                  to="#" 
                   role="button"
-                  onClick={this.onAgentTransaction}
-                >
-                  <i className="fa fa-calendar" /> Agent Transactions
+                  onClick={this.onDeleteAgent}
+                  >
+                  <i className="fa fa-male">Delete Agent</i>
                 </Link>
               </div>
 
               <div className="col-md-4">
                 <a
                   id="anchor"
+                  className="btn btn-white"
+                  href="#"
+                  role="button"
+                  onClick={this.onAgentTransaction}
+                >
+                  <i className="fa fa-calendar" /> Agent Transactions
+                </a>
+              </div>
+
+              <div className="col-md-4">
+                <Link
+                  id="anchor"
                   className="btn  btn-white"
                   href="editAgent.html"
                   role="button"
+                  to="/edit-agent"
+                  
                 >
                   <i className="fa fa-edit">Edit agent</i>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -196,14 +238,17 @@ const mapStateToProps = state => {
   return {
     activateStatus: state.agentActivateRequest.status,
     deactivateStatus: state.agentDeactivateRequest.status,
-    agentTransactions: state.singleAgentAllTransaction
+    agentTransactions: state.singleAgentAllTransaction,
+    success: state.singleAgentAllTransaction.success,
+    deleteSuccess: state.deleteAgent.deleteSuccess
   };
 };
 
 const mapDispatchToProps = dispatch => ({
   activateAgent: (phoneNumber) => dispatch(activateAgent(phoneNumber)),
   deactivateAgent: (phoneNumber) => dispatch(deactivateAgent(phoneNumber)),
-  agentTransactions: (phoneNumber) => dispatch(agentTransactions(phoneNumber))
+  agentTransactions: (phoneNumber) => dispatch(agentTransactions(phoneNumber)),
+  deleteAgentRequest: (phoneNumber) => dispatch(deleteAgentRequest(phoneNumber))
 });
 
 export default connect(

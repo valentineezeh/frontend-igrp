@@ -9,6 +9,7 @@ import singleAgentRequests from './singleAgent';
 import agentActivateRequest from './activateAgent';
 import agentDeactivateRequest from './deactivateAgent';
 import singleAgentAllTransaction from './agentTransactions';
+import deleteAgent from './deleteAgent';
 
 export default combineReducers({
     auth,
@@ -20,5 +21,6 @@ export default combineReducers({
     singleAgentRequests,
     agentActivateRequest,
     agentDeactivateRequest,
-    singleAgentAllTransaction
+    singleAgentAllTransaction,
+    deleteAgent
 });

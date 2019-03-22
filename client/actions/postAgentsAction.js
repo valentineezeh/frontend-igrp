@@ -1,12 +1,25 @@
 import axios from 'axios';
 import toastr from 'toastr';
 import config from '../config/index';
-import { POST_AGENT } from './types';
+import { 
+    POST_AGENT, 
+    DELETE_AGENT_ERROR_MESSAGE, 
+    SET_CREATE_AGENT_ERROR
+} from './types';
 import routes from '../constants/routes';
 
 export const postAgent = newAgent => ({
     type: POST_AGENT,
     newAgent
+});
+
+const setCreateAgentError = error => ({
+    type: SET_CREATE_AGENT_ERROR,
+    error
+});
+
+export const deleteErrorMessages = () => ({
+    type: DELETE_AGENT_ERROR_MESSAGE
 });
 
 const agentRequest = agentDetails => (dispatch) => {
@@ -18,7 +31,7 @@ const agentRequest = agentDetails => (dispatch) => {
         toastr.success(message);
     }).catch( error => {
         const { message } = error.response.data;
-        toastr.error(message);
+        dispatch(setCreateAgentError(message));
     });
 };
 

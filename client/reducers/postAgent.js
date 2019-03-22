@@ -1,7 +1,12 @@
-import { POST_AGENT } from '../actions/types';
+import {
+    POST_AGENT,
+    SET_CREATE_AGENT_ERROR,
+    DELETE_AGENT_ERROR_MESSAGE
+} from '../actions/types';
 
 const initialState = {
-    status: false
+    status: false,
+    error: ''
 };
 
 export default (state = initialState, action) => {
@@ -11,6 +16,16 @@ export default (state = initialState, action) => {
             ...state,
             status: true
         }
+        case SET_CREATE_AGENT_ERROR:
+        return {
+          ...state,
+          status: false,
+          error: action.error
+        };
+        case DELETE_AGENT_ERROR_MESSAGE:
+        return {
+          error: {}
+        };
         default: return state;
     }
 }
