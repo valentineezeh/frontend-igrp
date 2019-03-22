@@ -30,7 +30,6 @@ const userLoginRequest = userDetails => (dispatch) => {
         dispatch(setCurrentUser(jwt.decode(token)));
     }).catch( error => {
         const { message } = error.response.data;
-        toastr.error(message);
         dispatch(setCurrentUserError(message));
     });
 };

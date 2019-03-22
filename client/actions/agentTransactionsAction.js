@@ -1,5 +1,6 @@
 import axios from 'axios';
 import toastr from 'toastr';
+import Cookie from 'cookies-js';
 import config from '../config/index';
 import { AGENT_TRANSACTIONS_REQUEST } from './types';
 import routes from '../constants/routes';
@@ -16,6 +17,7 @@ const agentTransactions = phoneNumber => {
         return axios.get(`${config.apiUrl}${routes.AGENTTRANSACTIONS}/${phoneNumber}`).then(
             response => {
                 const { message } = response.data;
+                Cookie.set('phoneNumber', phoneNumber);
                 dispatch(singleAgentTransactions(response.data.data));
                 toastr.success(message);
             }

@@ -59,8 +59,8 @@ class UserNavigation extends React.Component {
             </div>
             <div id="navbar" className="collapse navbar-collapse">
               <ul className="nav navbar-nav">
-                <li className="active">
-                  <Link to="/dashboard" className="active">
+                <li>
+                  <Link to="/dashboard" >
                     Dashboard
                   </Link>
                 </li>

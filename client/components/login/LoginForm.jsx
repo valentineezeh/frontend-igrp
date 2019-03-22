@@ -2,11 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
+import isEmpty from 'is-empty';
 import TextField from "../commons/TextField.jsx";
 import validateInput from "../../middleware/loginValidate";
-import SubmitButton from "../commons/SubmitButton.jsx";
-import userLoginRequest from "../../actions/loginAction.js";
-import IsLoading from '../commons/IsLoading.jsx';
+import userLoginRequest, { deleteErrorMessages } from "../../actions/loginAction.js";
+import ErrorAlertNotification from '../commons/ErrorAlertNotification.jsx';
 
 /**
  * @class LoginForm
@@ -23,6 +23,7 @@ class LoginForm extends React.Component {
     };
     this.onSubmit = this.onSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   /**
@@ -49,9 +50,7 @@ class LoginForm extends React.Component {
   handleDelete() {
     const { deleteErrorMessage } = this.props;
     deleteErrorMessage();
-    this.setState({
-      password: ""
-    });
+    this.setState({ isLoading: false });
   }
 
   isValid() {
@@ -77,18 +76,10 @@ class LoginForm extends React.Component {
 
   render() {
     const { errors, phoneNumber, password, isLoading } = this.state;
-    const { auth } = this.props;
+    const { auth, error } = this.props;
 
     if (auth) {
       return <Redirect to="/dashboard" />;
-    }
-
-    if (isLoading) {
-      return (
-        <div>
-            <IsLoading />
-        </div>
-      );
     }
 
     const form = (
@@ -107,9 +98,15 @@ class LoginForm extends React.Component {
         </header>
         <div className="login-page">
           <div className="form">
-            <form class="login-form">
+            <form className="login-form">
             <h2>Login Form</h2>
             <hr />
+            {!isEmpty(error) && (
+              <ErrorAlertNotification
+                errors={error}
+                onClick={this.handleDelete}
+              />
+              )}
               <TextField
                     error={errors.phoneNumber}
                     onChange={this.onChange}
@@ -128,13 +125,33 @@ class LoginForm extends React.Component {
                     field="password"
                     className="loginInput"
                   />
-               <SubmitButton
-                  type="button"
-                  className="btn btn-default btn-block"
-                  onClick={this.onSubmit}
-                  label="Login"
-                />
-               <p class="message">Welcome Admin! <a href="#">Please use the above form to access the dashboard</a></p>
+                                  {
+                    isLoading ? (
+                    <a
+                    href="#"
+                    type="submit"
+                    className="btn btn-danger btn-block"
+                  >
+                  <i className="fa fa-spinner fa-spin" />
+                  {' '} 
+                  Login
+                  </a>
+                  
+
+                    ) : 
+                    (
+                    <a
+                    href="#"
+                    type="submit"
+                    className="btn btn-danger btn-block"
+                    onClick={this.onSubmit}
+                  >
+                      {' '}
+                      Login
+                  </a>
+                    )
+                  }
+               <p className="message">Welcome Admin! <a href="#">Please use the above form to access the dashboard</a></p>
     </form>
   </div>
 </div>
@@ -153,7 +170,8 @@ LoginForm.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  auth: state.auth.isAuthenticated
+  auth: state.auth.isAuthenticated,
+  error: state.auth.error
 });
 
 const mapDispatchToProps = dispatch => ({

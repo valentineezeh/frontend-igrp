@@ -12,6 +12,7 @@ import Transactions from "./transactionsComponent/Transactions.jsx";
 import privateRoute from "../utils/privateRoute";
 import SingleAgentPage from "./agentComponent/singleAgentPage/SingleAgentPage.jsx";
 import AgentTransactionPage from "./agentComponent/agentTransaction/AgentTransactionPage.jsx";
+import EditAgentPage from './agentComponent/editAgentComponent/EditAgentPage.jsx';
 
 class App extends React.Component {
   render() {
@@ -43,6 +44,11 @@ class App extends React.Component {
             exact
             path="/agent-transactions"
             component={privateRoute(AgentTransactionPage)}
+          />
+          <Route
+            exact
+            path="/edit-agent"
+            component={privateRoute(EditAgentPage)}
           />
         </div>
         <FooterBar />

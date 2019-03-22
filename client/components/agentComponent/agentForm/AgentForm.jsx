@@ -2,11 +2,13 @@ import React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
+import isEmpty from 'is-empty';
 import TextField from "../../commons/TextField.jsx";
 import validateInput from "../../../middleware/agentInputValidate";
 import SubmitButton from "../../commons/SubmitButton.jsx";
-import agentRequest from "../../../actions/postAgentsAction";
+import agentRequest, { deleteErrorMessages } from "../../../actions/postAgentsAction";
 import IsLoading from '../../commons/IsLoading.jsx';
+import ErrorAlertNotification from '../../commons/ErrorAlertNotification.jsx';
 
 /**
  * @class AgentForm
@@ -23,12 +25,14 @@ class AgentForm extends React.Component {
       bvn: "",
       nimc: "",
       password: "",
+      driverLicence: '',
       errors: {},
       isLoading: false,
       done: false
     };
     this.onSubmit = this.onSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   componentDidMount() {
@@ -78,6 +82,12 @@ class AgentForm extends React.Component {
     }
   }
 
+  handleDelete(){
+    const { deleteErrorMessages } = this.props;
+    deleteErrorMessages();
+    this.setState({ isLoading: false });
+  }
+
   render() {
     const {
       errors,
@@ -89,21 +99,14 @@ class AgentForm extends React.Component {
       bvn,
       nimc,
       age,
+      driverLicence,
       isLoading
     } = this.state;
 
-    const { status } = this.props;
+    const { status, error } = this.props;
 
     if (status) {
       return <Redirect to="/agents" />;
-    }
-
-    if (isLoading) {
-      return (
-        <div>
-            <IsLoading />
-        </div>
-      );
     }
 
     const agentForm = (
@@ -114,6 +117,12 @@ class AgentForm extends React.Component {
               <h3 class="panel-title">Create Agents</h3>
             </div>
             <div class="panel-body">
+            {!isEmpty(error) && (
+              <ErrorAlertNotification
+                errors={error}
+                onClick={this.handleDelete}
+              />
+              )}
               <form>
                 <div class="form-row">
                   <div class="form-group col-md-6">
@@ -223,19 +232,53 @@ class AgentForm extends React.Component {
                     />
                   </div>
                 </div>
-
-                <div class="form-group text-center">
-                  <SubmitButton
-                    type="submit"
-                    className="mybutton"
-                    onClick={this.onSubmit}
-                    label="Create Agent"
-                  />
+                <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>Driver Licence</label>
+                    <TextField
+                      error={errors.driverLicence}
+                      onChange={this.onChange}
+                      value={driverLicence}
+                      field="driverLicence"
+                      type="text"
+                      className="mydriver"
+                      id="inputEmail4"
+                      placeholder="Enter Driver Licence"
+                    />
+                  </div>
                 </div>
               </form>
+          </div>
+              <div class="form-group text-center">
+                  {
+                    isLoading ? (
+                    <a
+                    href="#"
+                    type="submit"
+                    className="btn btn-danger"
+                  >
+                  <i className="fa fa-spinner fa-spin" />
+                  {' '} 
+                  Create Agent
+                  </a>
+                  
+
+                    ) : 
+                    (
+                    <a
+                    href="#"
+                    type="submit"
+                    className="btn btn-danger"
+                    onClick={this.onSubmit}
+                  >
+                      {' '}
+                      Create Agent
+                  </a>
+                    )
+                  }
+                </div>
               <br />
             </div>
-          </div>
         </div>
       </div>
     );
@@ -252,10 +295,11 @@ AgentForm.contextTypes = {
 };
 
 const mapStateToProps = state => ({
-  status: state.postAgent.status
+  status: state.postAgent.status,
+  error: state.postAgent.error
 });
 
 export default connect(
   mapStateToProps,
-  { agentRequest }
+  { agentRequest, deleteErrorMessages }
 )(AgentForm);

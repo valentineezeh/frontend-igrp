@@ -1,5 +1,5 @@
 import React from 'react';
-import { MDBDataTable, MDBBtn } from 'mdbreact';
+import { MDBDataTable } from 'mdbreact';
 import moment from '../../middleware/moment';
 
 class LatestAgent extends React.Component {

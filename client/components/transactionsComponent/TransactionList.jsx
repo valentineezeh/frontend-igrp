@@ -1,9 +1,53 @@
 import React from "react";
-import TransactionsRow from "./TransactionsRow.jsx";
+import { MDBDataTable } from 'mdbreact';
+import moment from '../../middleware/moment';
 
 class TransactionList extends React.Component {
   render() {
     const transactions = this.props.allTransactions;
+    const data = {
+      colums: [
+        {
+          label: 'Agent Name',
+          field: 'agentName',
+          sort: 'dsc',
+          width: 150
+        },
+        {
+          label: 'Driver Name',
+          field: 'driverName',
+          sort: 'dsc',
+          width: 150
+        },
+        {
+          label: 'Agent Phone Number',
+          field: 'agentNumber',
+          sort: 'dsc',
+          width: 150
+        },
+        {
+          label: 'Vehicle Number',
+          field: 'vehicleNumber',
+          sort: 'dsc',
+          width: 150
+        },
+        {
+          label: 'Date',
+          field: 'date',
+          sort: 'dsc',
+          width: 150
+        },
+      ],
+      rows: transactions.map(transaction => {
+        return {
+          agentName: transaction.agentName,
+          driverName: transaction.driverName,
+          agentNumber: transaction.agentNumber,
+          vehicleNumber: transaction.vehicleNumber,
+          date: moment(transaction.date).format("MM-DD-YY")
+        }
+      })
+    }
 
     return (
       <div class="col-md-9">
@@ -12,27 +56,12 @@ class TransactionList extends React.Component {
             <h3 class="panel-title">All Transactions</h3>
           </div>
           <div className="panel-body">
-            <div className="table-responsive">
-              <table id="example" className="table table-striped table-dark">
-                <thead>
-                  <tr>
-                    <th scope="col">Agent Name</th>
-                    <th scope="col">Driver Name</th>
-                    <th scope="col">Agent Phone Number</th>
-                    <th scope="col">Vehicle Number</th>
-                    <th scope="col">Date of Transaction</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {transactions.map(transactions => (
-                    <TransactionsRow
-                      key={transactions.id}
-                      transactions={transactions}
-                    />
-                  ))}
-                </tbody>
-              </table>
-            </div>
+      <MDBDataTable
+        striped
+        bordered
+        small
+        data={data}
+        /> 
           </div>
         </div>
       </div>

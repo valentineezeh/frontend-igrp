@@ -8,7 +8,8 @@ const routes = {
     SINGLEAGENT: '/singleAgent',
     ACTIVATEAGENT: '/activate',
     DEACTIVATEAGENT: '/deactivate',
-    AGENTTRANSACTIONS: '/agentTransaction'
+    AGENTTRANSACTIONS: '/agentTransaction',
+    DELETEAGENT: '/deleteAgent'
 
 };
 

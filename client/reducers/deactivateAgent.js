@@ -1,7 +1,8 @@
 import { DEACTIVATE_AGENT_REQUEST } from '../actions/types';
 
 const initialState = {
-    message: {}
+    message: {},
+    status: false
 }
 
 export default ( state = initialState, action ) => {
@@ -9,7 +10,8 @@ export default ( state = initialState, action ) => {
         case DEACTIVATE_AGENT_REQUEST:
             return {
                 ...state,
-                message: action.message
+                message: action.message,
+                status: true
             }
             default: return state;
     }

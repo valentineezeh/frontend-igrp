@@ -83,8 +83,6 @@ class DriverForm extends React.Component {
 
     const { status } = this.props;
 
-    console.log("--->>", status);
-
     if (status) {
       return <Redirect to="/drivers" />;
     }
@@ -178,7 +176,9 @@ class DriverForm extends React.Component {
                     />
                   </div>
                 </div>
-                <div className="form-group text-center col-md-12">
+              </form>
+            </div>
+            <div class="form-group text-center">
                   <SubmitButton
                     type="submit"
                     className="mybutton"
@@ -186,8 +186,7 @@ class DriverForm extends React.Component {
                     label="Create Driver"
                   />
                 </div>
-              </form>
-            </div>
+                <br />
           </div>
         </div>
       </div>

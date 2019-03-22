@@ -9,9 +9,11 @@ import fetchTransactions from "../../actions/transactionsAction";
 
 class Dashboard extends React.Component {
   componentDidMount() {
-    this.props.fetchAgents();
     this.props.fetchDrivers();
     this.props.fetchTransactions();
+  }
+  componentWillMount() {
+    this.props.fetchAgents();
   }
   render() {
     const dashboard = (

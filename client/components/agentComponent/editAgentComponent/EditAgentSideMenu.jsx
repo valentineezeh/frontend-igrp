@@ -1,19 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
-import { connect } from 'react-redux';
-import fetchAgents from '../../../actions/agentsAction';
-import fetchDrivers from '../../../actions/driversAction';
-import fetchTransactions from '../../../actions/transactionsAction';
 
-class AgentSideMenu extends React.Component {
-  componentDidMount() {
-    this.props.fetchDrivers();
-    this.props.fetchTransactions();
-  }
-  componentWillMount() {
-    this.props.fetchAgents();
-  }
+class EditAgentSideMenu extends React.Component {
   render() {
     const { agents } = this.props.allAgents;
     const driverLength = this.props.allDrivers.length;
@@ -22,7 +10,10 @@ class AgentSideMenu extends React.Component {
       <div>
         <div class="col-md-3">
           <div className="list-group">
-            <Link to="/" className="list-group-item active main-color-bg">
+            <Link
+              to="/dashboard"
+              className="list-group-item active main-color-bg"
+            >
               <span className="glyphicon glyphicon-cog" aria-hidden="true" />{" "}
               Dashboard
             </Link>
@@ -48,24 +39,4 @@ class AgentSideMenu extends React.Component {
   }
 }
 
-AgentSideMenu.propTypes = {
-  allAgents: PropTypes.array.isRequired,
-  allDrivers: PropTypes.array.isRequired,
-  allTransactions: PropTypes.array.isRequired,
-  fetchAgents: PropTypes.func.isRequired,
-  fetchDrivers: PropTypes.func.isRequired,
-  fetchTransactions: PropTypes.func.isRequired
-};
-
-const mapStateToProps = state => {
-  return {
-    allAgents: state.allAgents,
-    allDrivers: state.allDrivers,
-    allTransactions: state.allTransactions
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  { fetchAgents, fetchDrivers, fetchTransactions }
-)(AgentSideMenu);
+export default EditAgentSideMenu;
