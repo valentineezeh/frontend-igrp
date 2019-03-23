@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-class DriverSideMenu extends React.Component {
+class VehicleSideMenu extends React.Component {
   render() {
     const { agents } = this.props.allAgents;
-    const driverLength = this.props.allDrivers.length;
+    const vehicleLength = this.props.allVehicles.length;
     const transactionLength = this.props.allTransactions.length;
     return (
       <div>
@@ -22,7 +22,7 @@ class DriverSideMenu extends React.Component {
 
             <Link to="/drivers" className="list-group-item">
               <i className="fas fa-truck" /> Drivers{" "}
-              <span className="badge">{driverLength}</span>
+              <span className="badge">{vehicleLength}</span>
             </Link>
 
             <Link to="/transactions" className="list-group-item">
@@ -36,4 +36,4 @@ class DriverSideMenu extends React.Component {
   }
 }
 
-export default DriverSideMenu;
+export default VehicleSideMenu;

@@ -23,8 +23,8 @@ class SideMenu extends React.Component {
               <span className="badge">{agents.length}</span>
             </Link>
 
-            <Link to="/drivers" className="list-group-item">
-              <i className="fas fa-truck" /> Drivers{" "}
+            <Link to="/vehicles" className="list-group-item">
+              <i className="fas fa-truck" /> Vehicles{" "}
               <span className="badge">{driverLength}</span>
             </Link>
 

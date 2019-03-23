@@ -4,12 +4,12 @@ import { connect } from "react-redux";
 import SideMenu from "./SideMenu.jsx";
 import DashboardOverview from "./Overview.jsx";
 import fetchAgents from "../../actions/agentsAction";
-import fetchDrivers from "../../actions/driversAction";
+import fetchVehicles from "../../actions/vehiclesAction";
 import fetchTransactions from "../../actions/transactionsAction";
 
 class Dashboard extends React.Component {
   componentDidMount() {
-    this.props.fetchDrivers();
+    this.props.fetchVehicles();
     this.props.fetchTransactions();
   }
   componentWillMount() {
@@ -46,12 +46,12 @@ class Dashboard extends React.Component {
             <div className="row">
               <SideMenu
                 allAgents={this.props.allAgents}
-                allDrivers={this.props.allDrivers}
+                allDrivers={this.props.allVehicles}
                 allTransactions={this.props.allTransactions}
               />
               <DashboardOverview
                 allAgents={this.props.allAgents}
-                allDrivers={this.props.allDrivers}
+                allDrivers={this.props.allVehicles}
                 allTransactions={this.props.allTransactions}
               />
             </div>
@@ -65,22 +65,22 @@ class Dashboard extends React.Component {
 
 Dashboard.propTypes = {
   allAgents: PropTypes.array.isRequired,
-  allDrivers: PropTypes.array.isRequired,
+  allVehicles: PropTypes.array.isRequired,
   allTransactions: PropTypes.array.isRequired,
   fetchAgents: PropTypes.func.isRequired,
-  fetchDrivers: PropTypes.func.isRequired,
+  fetchVehicles: PropTypes.func.isRequired,
   fetchTransactions: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => {
   return {
     allAgents: state.allAgents,
-    allDrivers: state.allDrivers,
+    allVehicles: state.allVehicles,
     allTransactions: state.allTransactions
   };
 };
 
 export default connect(
   mapStateToProps,
-  { fetchAgents, fetchDrivers, fetchTransactions }
+  { fetchAgents, fetchVehicles, fetchTransactions }
 )(Dashboard);

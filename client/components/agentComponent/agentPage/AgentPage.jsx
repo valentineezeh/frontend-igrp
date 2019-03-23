@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import AgentSideMenu from "./AgentSideMenu.jsx";
 import AgentList from "./AgentList.jsx";
 import fetchAgents from "../../../actions/agentsAction";
-import fetchDrivers from "../../../actions/driversAction";
+import fetchDrivers from "../../../actions/vehiclesAction";
 import fetchTransactions from "../../../actions/transactionsAction";
 
 class AgentPage extends React.Component {

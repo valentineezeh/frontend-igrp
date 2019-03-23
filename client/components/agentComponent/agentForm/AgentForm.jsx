@@ -23,9 +23,12 @@ class AgentForm extends React.Component {
       age: "",
       phoneNumber: "",
       bvn: "",
-      nimc: "",
       password: "",
-      driverLicence: '',
+      meansofId: 'sample',
+      guarantorFullname: '',
+      guarantorPhonenumber: '',
+      guarantorAddress: '',
+      idNumber: '',
       errors: {},
       isLoading: false,
       done: false
@@ -97,13 +100,18 @@ class AgentForm extends React.Component {
       address,
       fullname,
       bvn,
-      nimc,
       age,
-      driverLicence,
+      meansofId,
+      guarantorFullname,
+      guarantorPhonenumber,
+      guarantorAddress,
+      idNumber,
       isLoading
     } = this.state;
 
     const { status, error } = this.props;
+
+    const meansOfIdentificationList = ['Select', 'voters card','international passport','national id card','drivers license']
 
     if (status) {
       return <Redirect to="/agents" />;
@@ -123,10 +131,14 @@ class AgentForm extends React.Component {
                 onClick={this.handleDelete}
               />
               )}
+              <div class="text-center text-danger">
+                <p>The fields with asterisks are required</p>
+              </div>
+              <hr />
               <form>
                 <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label>Phone Number</label>
+                  <div class="form-group col-md-4">
+                    <label>Phone Number *</label>
                     <TextField
                       error={errors.phoneNumber}
                       onChange={this.onChange}
@@ -137,8 +149,8 @@ class AgentForm extends React.Component {
                       placeholder="Phone Number"
                     />
                   </div>
-                  <div class="form-group col-md-6">
-                    <label>Fullname</label>
+                  <div class="form-group col-md-4">
+                    <label>Fullname *</label>
                     <TextField
                       error={errors.fullname}
                       onChange={this.onChange}
@@ -152,8 +164,8 @@ class AgentForm extends React.Component {
                 </div>
 
                 <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label>Email</label>
+                  <div class="form-group col-md-4">
+                    <label>Email *</label>
                     <TextField
                       error={errors.email}
                       onChange={this.onChange}
@@ -164,8 +176,8 @@ class AgentForm extends React.Component {
                       placeholder="Email"
                     />
                   </div>
-                  <div class="form-group col-md-6">
-                    <label>Address</label>
+                  <div class="form-group col-md-4">
+                    <label>Address *</label>
                     <TextField
                       error={errors.address}
                       onChange={this.onChange}
@@ -179,8 +191,8 @@ class AgentForm extends React.Component {
                 </div>
 
                 <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label>Age</label>
+                  <div class="form-group col-md-4">
+                    <label>Age *</label>
                     <TextField
                       error={errors.age}
                       onChange={this.onChange}
@@ -191,8 +203,8 @@ class AgentForm extends React.Component {
                       placeholder="Age"
                     />
                   </div>
-                  <div class="form-group col-md-6">
-                    <label>BVN</label>
+                  <div class="form-group col-md-4">
+                    <label>BVN *</label>
                     <TextField
                       error={errors.bvn}
                       onChange={this.onChange}
@@ -206,21 +218,8 @@ class AgentForm extends React.Component {
                 </div>
 
                 <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label>NIMC</label>
-                    <TextField
-                      error={errors.nimc}
-                      onChange={this.onChange}
-                      value={nimc}
-                      field="nimc"
-                      type="text"
-                      className="mynimc"
-                      id="inputEmail4"
-                      placeholder="NIMC"
-                    />
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label>Password</label>
+                  <div class="form-group col-md-4">
+                    <label>Password *</label>
                     <TextField
                       error={errors.password}
                       onChange={this.onChange}
@@ -231,21 +230,76 @@ class AgentForm extends React.Component {
                       placeholder="Password"
                     />
                   </div>
-                </div>
-                <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label>Driver Licence</label>
+                  <div class="form-group col-md-4">
+                    <label>Guarantor Address</label>
                     <TextField
-                      error={errors.driverLicence}
+                      error={errors.guarantorAddress}
                       onChange={this.onChange}
-                      value={driverLicence}
-                      field="driverLicence"
+                      value={guarantorAddress}
+                      field="guarantorAddress"
                       type="text"
-                      className="mydriver"
-                      id="inputEmail4"
-                      placeholder="Enter Driver Licence"
+                      className="myguarantorAddress"
+                      placeholder="Enter Guarantor Address"
                     />
                   </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-4">
+                    <label>Guarantor Fullname</label>
+                    <TextField
+                      error={errors.guarantorFullname}
+                      onChange={this.onChange}
+                      value={guarantorFullname}
+                      field="guarantorFullname"
+                      type="text"
+                      className="myguarantorFullname"
+                      placeholder="Enter Guarantor Fullname"
+                    />
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label>Guarantor Phone Number</label>
+                    <TextField
+                      error={errors.guarantorPhonenumber}
+                      onChange={this.onChange}
+                      value={guarantorPhonenumber}
+                      field="guarantorPhonenumber"
+                      type="text"
+                      className="myguarantorPhonenumber"
+                      placeholder="Enter Guarantor Phonenumber"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label>Identification Number</label>
+                    <TextField
+                      error={errors.idNumber}
+                      onChange={this.onChange}
+                      value={idNumber}
+                      field="idNumber"
+                      type="text"
+                      className="myidNumber"
+                      placeholder="Enter Identification Number"
+                    />
+                  </div>
+                  <div className="col-md-4 form-group">
+                     <label htmlFor="email">Select Means of Identification </label>
+                     <select
+                       className="form-control select2"
+                       onChange={this.onChange}
+                       name="meansofId"
+                       value={meansofId}
+                     >
+                       {
+                              meansOfIdentificationList.map(idMeans => (
+                                <option value={idMeans}>
+                                  {idMeans}
+                                </option>
+                              ))
+                          }
+                     </select>
+                   </div>
                 </div>
               </form>
           </div>

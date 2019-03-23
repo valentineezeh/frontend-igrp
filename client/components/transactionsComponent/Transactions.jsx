@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import TransactionSideMenu from "./TransactionSideMenu.jsx";
 import TransactionList from "./TransactionList.jsx";
 import fetchAgents, { fetchAgentsMessage } from "../../actions/agentsAction";
-import fetchDrivers from "../../actions/driversAction";
+import fetchDrivers from "../../actions/vehiclesAction";
 import fetchTransactions from "../../actions/transactionsAction";
 
 class Transactions extends React.Component {

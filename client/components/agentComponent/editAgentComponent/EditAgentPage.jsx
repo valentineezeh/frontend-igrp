@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import fetchAgents from '../../../actions/agentsAction';
-import fetchDrivers from '../../../actions/driversAction';
+import fetchDrivers from '../../../actions/vehiclesAction';
 import fetchTransactions from '../../../actions/transactionsAction';
 import EditAgentSideMenu from '../editAgentComponent/EditAgentSideMenu.jsx';
 import EditAgentForm from './EditAgentForm.jsx';

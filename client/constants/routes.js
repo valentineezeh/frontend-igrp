@@ -2,14 +2,15 @@ const routes = {
     SIGN_IN: '/superLogin',
     AGENTS: '/agents',
     CREATEAGENTS: '/createAgent',
-    CREATEDRIVERS: '/createDriver',
-    DRIVERS: '/drivers',
+    CREATEVEHICLES: '/createVehicle',
+    VEHICLES: '/vehicles',
     TRANSACTIONS: '/transactions',
     SINGLEAGENT: '/singleAgent',
     ACTIVATEAGENT: '/activate',
     DEACTIVATEAGENT: '/deactivate',
     AGENTTRANSACTIONS: '/agentTransaction',
-    DELETEAGENT: '/deleteAgent'
+    DELETEAGENT: '/deleteAgent',
+    SINGLEVEHICLE: '/singleVehicle'
 
 };
 

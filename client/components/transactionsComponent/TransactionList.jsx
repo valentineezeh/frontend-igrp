@@ -16,25 +16,25 @@ class TransactionList extends React.Component {
         {
           label: 'Driver Name',
           field: 'driverName',
-          sort: 'dsc',
+          sort: 'asc',
           width: 150
         },
         {
           label: 'Agent Phone Number',
           field: 'agentNumber',
-          sort: 'dsc',
+          sort: 'asc',
           width: 150
         },
         {
           label: 'Vehicle Number',
           field: 'vehicleNumber',
-          sort: 'dsc',
+          sort: 'asc',
           width: 150
         },
         {
           label: 'Date',
           field: 'date',
-          sort: 'dsc',
+          sort: 'asc',
           width: 150
         },
       ],

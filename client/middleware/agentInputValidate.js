@@ -54,20 +54,6 @@ export default function validateInput(data){
         errors.bvn = 'This field can not be blank';
     }
 
-    if(data.nimc == ''){
-        errors.nimc = 'This field is required';
-    }
-    if (!data.nimc || data.nimc.trim().length === 0) {
-        errors.nimc = 'This field can not be blank';
-    }
-
-    if(data.driverLicence == ''){
-        errors.driverLicence = 'This field is required';
-    }
-    if (!data.driverLicence || data.driverLicence.trim().length === 0) {
-        errors.driverLicence = 'This field can not be blank';
-    }
-
     return{
         errors,
         isValid: isEmpty(errors)

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import AgentTransactionSideMenu from "./AgentTransactionSideMenu.jsx";
 import AgentTransactionTable from './AgentTransactionTable.jsx'
 import fetchAgents from '../../../actions/agentsAction';
-import fetchDrivers from '../../../actions/driversAction';
+import fetchDrivers from '../../../actions/vehiclesAction';
 import fetchTransactions from '../../../actions/transactionsAction';
 
 class AgentTransactionPage extends React.Component {

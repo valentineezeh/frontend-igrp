@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from 'react-redux';
 import fetchAgents from '../../../actions/agentsAction';
-import fetchDrivers from '../../../actions/driversAction';
+import fetchVehicles from '../../../actions/vehiclesAction';
 import fetchTransactions from '../../../actions/transactionsAction';
 
 class AgentSideMenu extends React.Component {
   componentDidMount() {
-    this.props.fetchDrivers();
+    this.props.fetchVehicles();
     this.props.fetchTransactions();
   }
   componentWillMount() {
@@ -16,7 +16,7 @@ class AgentSideMenu extends React.Component {
   }
   render() {
     const { agents } = this.props.allAgents;
-    const driverLength = this.props.allDrivers.length;
+    const vehicleLength = this.props.allVehicles.length;
     const transactionLength = this.props.allTransactions.length;
     return (
       <div>
@@ -33,8 +33,8 @@ class AgentSideMenu extends React.Component {
             </Link>
 
             <Link to="/drivers" className="list-group-item">
-              <i className="fas fa-truck" /> Drivers{" "}
-              <span className="badge">{driverLength}</span>
+              <i className="fas fa-truck" /> Vehicles{" "}
+              <span className="badge">{vehicleLength}</span>
             </Link>
 
             <Link to="transactions" className="list-group-item">
@@ -50,22 +50,22 @@ class AgentSideMenu extends React.Component {
 
 AgentSideMenu.propTypes = {
   allAgents: PropTypes.array.isRequired,
-  allDrivers: PropTypes.array.isRequired,
+  allVehicles: PropTypes.array.isRequired,
   allTransactions: PropTypes.array.isRequired,
   fetchAgents: PropTypes.func.isRequired,
-  fetchDrivers: PropTypes.func.isRequired,
+  fetchVehicles: PropTypes.func.isRequired,
   fetchTransactions: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => {
   return {
     allAgents: state.allAgents,
-    allDrivers: state.allDrivers,
+    allVehicles: state.allVehicles,
     allTransactions: state.allTransactions
   };
 };
 
 export default connect(
   mapStateToProps,
-  { fetchAgents, fetchDrivers, fetchTransactions }
+  { fetchAgents, fetchVehicles, fetchTransactions }
 )(AgentSideMenu);
