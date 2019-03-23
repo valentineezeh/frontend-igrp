@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import DriverSideMenu from "./DriverSideMenu.jsx";
-import DriverForm from "./DriverForm.jsx";
+import VehicleSideMenu from "./VehicleSideMenu.jsx";
+import VehicleForm from "./VehicleForm.jsx";
 
-class Drivers extends React.Component {
+class Vehicles extends React.Component {
   render() {
     const drivers = (
       <div>
@@ -15,8 +15,8 @@ class Drivers extends React.Component {
                   <span
                     className="glyphicon glyphicon-cog"
                     aria-hidden="true"
-                  />
-                  <small> Drivers</small>
+                  />{'  '}
+                  Create Vehicles
                 </h1>
               </div>
             </div>
@@ -26,17 +26,17 @@ class Drivers extends React.Component {
           <div className="container">
             <ol className="breadcrumb">
               <li>
-                <a href="index.html">Dashboard</a>
+                Dashboard
               </li>
-              <li className="active">Drivers</li>
+              <li className="active">Vehicles</li>
             </ol>
           </div>
         </section>
         <section>
           <div className="container">
             <div className="row">
-              <DriverSideMenu />
-              <DriverForm />
+              <VehicleSideMenu />
+              <VehicleForm />
             </div>
           </div>
         </section>
@@ -46,4 +46,4 @@ class Drivers extends React.Component {
   }
 }
 
-export default Drivers;
+export default Vehicles;

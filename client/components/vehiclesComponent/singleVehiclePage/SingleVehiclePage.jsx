@@ -1,33 +1,29 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import SideMenu from "./SideMenu.jsx";
-import DashboardOverview from "./Overview.jsx";
-import fetchAgents from "../../actions/agentsAction";
-import fetchVehicles from "../../actions/vehiclesAction";
-import fetchTransactions from "../../actions/transactionsAction";
+import { Link } from "react-router-dom";
+import SingleVehicleSideMenu from "./SingleVehicleSideMenu.jsx";
+import SingleVehicleOverview from "./SingleVehicleOverview.jsx";
+import fetchVehicles from '../../../actions/vehiclesAction';
+import fetchAgents from '../../../actions/agentsAction';
+import fetchTransactions from '../../../actions/transactionsAction';
 
-class Dashboard extends React.Component {
+class SingleVehiclePage extends React.Component {
   componentDidMount() {
     this.props.fetchVehicles();
     this.props.fetchTransactions();
-  }
-  componentWillMount() {
     this.props.fetchAgents();
   }
   render() {
-    const dashboard = (
+    const singleAgentContainer = (
       <div>
         <header id="header">
           <div className="container">
             <div className="row">
-              <div className="col-md-10">
+              <div className="col-md-12">
                 <h1>
-                  <span
-                    className="glyphicon glyphicon-cog"
-                    aria-hidden="true"
-                  />
-                  Dashboard <small>Manage Your Site</small>
+                  <span className="fa fa-cog" aria-hidden="true" />
+                  Manage Vehicles
                 </h1>
               </div>
             </div>
@@ -35,35 +31,33 @@ class Dashboard extends React.Component {
         </header>
 
         <section id="breadcrumb">
-          <div className="container">
-            <ol className="breadcrumb">
-              <li className="active">Dashboard</li>
+          <div class="container">
+            <ol class="breadcrumb">
+              <li>
+                <Link to="#">Single Vehicle Dashboard</Link>
+              </li>
             </ol>
           </div>
         </section>
         <section>
           <div className="container">
             <div className="row">
-              <SideMenu
+              <SingleVehicleSideMenu
                 allAgents={this.props.allAgents}
-                allDrivers={this.props.allVehicles}
+                allVehicles={this.props.allVehicles}
                 allTransactions={this.props.allTransactions}
               />
-              <DashboardOverview
-                allAgents={this.props.allAgents}
-                allDrivers={this.props.allVehicles}
-                allTransactions={this.props.allTransactions}
-              />
+              <SingleVehicleOverview/>
             </div>
           </div>
         </section>
       </div>
     );
-    return <div>{dashboard}</div>;
+    return <div>{singleAgentContainer}</div>;
   }
 }
 
-Dashboard.propTypes = {
+SingleVehiclePage .propTypes = {
   allAgents: PropTypes.array.isRequired,
   allVehicles: PropTypes.array.isRequired,
   allTransactions: PropTypes.array.isRequired,
@@ -80,7 +74,6 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  { fetchAgents, fetchVehicles, fetchTransactions }
-)(Dashboard);
+export default connect(mapStateToProps, {
+  fetchAgents, fetchVehicles, fetchTransactions 
+})(SingleVehiclePage );

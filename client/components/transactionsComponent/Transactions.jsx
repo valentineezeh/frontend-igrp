@@ -5,14 +5,14 @@ import { Link } from "react-router-dom";
 import TransactionSideMenu from "./TransactionSideMenu.jsx";
 import TransactionList from "./TransactionList.jsx";
 import fetchAgents, { fetchAgentsMessage } from "../../actions/agentsAction";
-import fetchDrivers from "../../actions/driversAction";
+import fetchVehicles from "../../actions/vehiclesAction";
 import fetchTransactions from "../../actions/transactionsAction";
 
 class Transactions extends React.Component {
   componentDidMount() {
     this.props.fetchAgentsMessage();
     this.props.fetchAgents();
-    this.props.fetchDrivers();
+    this.props.fetchVehicles();
     this.props.fetchTransactions();
   }
 
@@ -47,12 +47,10 @@ class Transactions extends React.Component {
             <div className="row">
               <TransactionSideMenu
                 allAgents={this.props.allAgents}
-                allDrivers={this.props.allDrivers}
+                allDrivers={this.props.allVehicles}
                 allTransactions={this.props.allTransactions}
               />
               <TransactionList
-                allAgents={this.props.allAgents}
-                allDrivers={this.props.allDrivers}
                 allTransactions={this.props.allTransactions}
               />
             </div>
@@ -66,10 +64,10 @@ class Transactions extends React.Component {
 
 Transactions.propTypes = {
   allAgents: PropTypes.shape({}).isRequired,
-  allDrivers: PropTypes.array.isRequired,
+  allVehicles: PropTypes.array.isRequired,
   allTransactions: PropTypes.array.isRequired,
   fetchAgents: PropTypes.func.isRequired,
-  fetchDrivers: PropTypes.func.isRequired,
+  fetchVehicles: PropTypes.func.isRequired,
   fetchAgentsMessage: PropTypes.func.isRequired,
   fetchTransactions: PropTypes.func.isRequired
 };
@@ -77,12 +75,12 @@ Transactions.propTypes = {
 const mapStateToProps = state => {
   return {
     allAgents: state.allAgents,
-    allDrivers: state.allDrivers,
+    allVehicles: state.allVehicles,
     allTransactions: state.allTransactions
   };
 };
 
 export default connect(
   mapStateToProps,
-  { fetchAgents, fetchDrivers, fetchTransactions, fetchAgentsMessage }
+  { fetchAgents, fetchVehicles, fetchTransactions, fetchAgentsMessage }
 )(Transactions);

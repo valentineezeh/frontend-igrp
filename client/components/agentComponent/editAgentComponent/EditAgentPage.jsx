@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import fetchAgents from '../../../actions/agentsAction';
-import fetchDrivers from '../../../actions/driversAction';
+import fetchVehicles from '../../../actions/vehiclesAction';
 import fetchTransactions from '../../../actions/transactionsAction';
 import EditAgentSideMenu from '../editAgentComponent/EditAgentSideMenu.jsx';
 import EditAgentForm from './EditAgentForm.jsx';
@@ -12,7 +12,7 @@ class EditAgentPage extends Component {
 
 componentDidMount() {
     this.props.fetchAgents()
-    this.props.fetchDrivers();
+    this.props.fetchVehicles();
     this.props.fetchTransactions();
     }
     render() {
@@ -43,7 +43,7 @@ componentDidMount() {
             <div className="row">
               <EditAgentSideMenu
                 allAgents={this.props.allAgents}
-                allDrivers={this.props.allDrivers}
+                allVehicles={this.props.allVehicles}
                 allTransactions={this.props.allTransactions}
               />
               <EditAgentForm />
@@ -58,24 +58,24 @@ componentDidMount() {
 
 EditAgentPage.propTypes = {
     allAgents: PropTypes.shape({}).isRequired,
-    allDrivers: PropTypes.shape({}).isRequired,
+    allVehicles: PropTypes.shape({}).isRequired,
     allTransactions: PropTypes.shape({}).isRequired,
     fetchAgents: PropTypes.func.isRequired,
-    fetchDrivers: PropTypes.func.isRequired,
+    fetchVehicles: PropTypes.func.isRequired,
     fetchTransactions: PropTypes.func.isRequired
   };
 
 const mapStateToProps = state => {
     return {
       allAgents: state.allAgents,
-      allDrivers: state.allDrivers,
+      allVehicles: state.allVehicles,
       allTransactions: state.allTransactions
     };
   };
 
 const mapDispatchToProps = dispatch => ({
     fetchAgents: () => dispatch(fetchAgents()),
-    fetchDrivers: () => dispatch(fetchDrivers()),
+    fetchVehicles: () => dispatch(fetchVehicles()),
     fetchTransactions: () => dispatch(fetchTransactions())
   });
 

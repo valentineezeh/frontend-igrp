@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
-class AgentSideMenu extends React.Component {
+class SingleVehicleSideMenu extends React.Component {
   render() {
     const { agents } = this.props.allAgents;
     const vehicleLength = this.props.allVehicles.length;
@@ -18,15 +19,15 @@ class AgentSideMenu extends React.Component {
               Dashboard
             </Link>
 
-            <Link to="/agents" className="list-group-item" id="agent">
+            <Link to="/agents" className="list-group-item">
               <i className="fas fa-users" /> Agents{" "}
               <span className="badge">{agents.length}</span>
             </Link>
 
-            <Link to="/vehicles" className="list-group-item">
+            <a href="/vehicles" className="list-group-item">
               <i className="fas fa-truck" /> Vehicles{" "}
               <span className="badge">{vehicleLength}</span>
-            </Link>
+            </a>
 
             <Link to="transactions" className="list-group-item">
               <i class="far fa-newspaper" /> Transactions
@@ -39,4 +40,12 @@ class AgentSideMenu extends React.Component {
   }
 }
 
-export default AgentSideMenu;
+const mapStateToProps = state => {
+  return {
+    allAgents: state.allAgents,
+    allVehicles: state.allVehicles,
+    allTransactions: state.allTransactions
+  };
+};
+
+export default connect(mapStateToProps)(SingleVehicleSideMenu);

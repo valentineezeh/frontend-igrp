@@ -12,19 +12,23 @@ class EditAgentForm extends Component {
         this.state = {
             id: this.props.singleAgent ? this.props.singleAgent._id: '',
             phoneNumber: this.props.singleAgent ? this.props.singleAgent.phoneNumber: '',
-            password: this.props.singleAgent ? this.props.singleAgent.password: '',
+            password: '',
             fullname: this.props.singleAgent ? this.props.singleAgent.fullname: '',
             address: this.props.singleAgent ? this.props.singleAgent.address: '',
             bvn: this.props.singleAgent ? this.props.singleAgent.bvn: '',
-            nimc: this.props.singleAgent ? this.props.singleAgent.nimc: '',
-            driverLicense: this.props.singleAgent ? this.props.singleAgent.driverLicense: '',
             email: this.props.singleAgent ? this.props.singleAgent.email: '',
             age: this.props.singleAgent ? this.props.singleAgent.age: '',
-            imenumber: this.props.singleAgent ? this.props.singleAgent.imenumber: '',
+            meansOfId: this.props.singleAgent ? this.props.singleAgent.meansOfId: 'sample',
+            guarantorsFullName: this.props.singleAgent ? this.props.singleAgent.guarantorsFullName: '',
+            guarantorsPhonenumber: this.props.singleAgent ? this.props.singleAgent.guarantorsPhonenumber: '',
+            guarantorsAddress: this.props.singleAgent ? this.props.singleAgent.guarantorsAddress: '',
+            idNumber: this.props.singleAgent ? this.props.singleAgent.idNumber: '',
             errors: {},
             isLoading: false,
         }
         this.onEditAgent = this.onEditAgent.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
+        this.onChange = this.onChange.bind(this)
     }
   
   /**
@@ -33,9 +37,8 @@ class EditAgentForm extends Component {
    * @returns {*} - single master agent object
    */
   static getDerivedStateFromProps(props, state) {
-    console.log('===>', props.singleAgent._id, state.id);
-    if (props.singleAgent._id === state.id) {
-        return null;
+    if (props.singleAgent._id == state.id) {
+        return null
     }
 
     return {
@@ -45,12 +48,13 @@ class EditAgentForm extends Component {
         fullname: props.singleAgent.fullname,
         address: props.singleAgent.address,
         bvn: props.singleAgent.bvn,
-        nimc: props.singleAgent.nimc,
-        driverLicense: pops.singleAgent.driverLicense,
         email: props.singleAgent.email,
         age: props.singleAgent.age,
-        imenumber: props.singleAgent.imenumber,
-
+        meansOfId: props.singleAgent.meansOfId,
+        guarantorsFullName: props.singleAgent.guarantorsFullName,
+        guarantorsPhonenumber: props.singleAgent.guarantorsPhonenumber,
+        guarantorsAddress: props.singleAgent.guarantorsAddress,
+        isNumber: props.singleAgent.isNumber,
     };
   }
 
@@ -72,7 +76,7 @@ class EditAgentForm extends Component {
       this.setState({
         [event.target.name]: event.target.value
       });
-    }
+    }  
   }
   /**
    *
@@ -81,9 +85,7 @@ class EditAgentForm extends Component {
    */
   onSubmit(event) {
     event.preventDefault();
-    console.log('I got here 2')
     if (this.isValid()) {
-      console.log('I got here')
       this.setState({ errors: {}, isLoading: true });
     }
   }
@@ -94,7 +96,6 @@ class EditAgentForm extends Component {
   }
 
   isValid() {
-    console.log('I got here 3')
     const { errors, isValid } = updateAgentInput(this.state);
     if (!isValid) {
       this.setState({ errors });
@@ -108,38 +109,29 @@ class EditAgentForm extends Component {
             fullname,
             address,
             bvn,
-            nimc,
-            driverLicense,
             email,
             age,
-            imenumber,
+            meansOfId,
+            guarantorsFullName,
+            guarantorsPhonenumber,
+            guarantorsAddress,
+            idNumber,
             errors,
             isLoading,
-        } = this.state
+        } = this.state;
+        const meansOfIdentificationList = ['Select', 'voters card','international passport','national id card','drivers license']
         const editAgentForm = (
             <div>
             <div class="col-md-9">
               <div class="panel panel-default">
                 <div class="panel-heading main-color-bg">
-                  <h3 class="panel-title">Create Agents</h3>
+                  <h3 class="panel-title">Update Agents Form</h3>
                 </div>
                 <div class="panel-body">
                   <form>
                     <div class="form-row">
-                      <div class="form-group col-md-6">
-                        <label>Phone Number</label>
-                        <TextField
-                          error={errors.phoneNumber}
-                          onChange={this.onChange}
-                          value={phoneNumber || ''}
-                          field="phoneNumber"
-                          type="text"
-                          className="form-control"
-                          placeholder="Enter Phone Number"
-                        />
-                      </div>
-                      <div class="form-group col-md-6">
-                        <label>Fullname</label>
+                      <div class="form-group col-md-4">
+                      <label>Fullname</label>
                         <TextField
                           error={errors.fullname}
                           onChange={this.onChange}
@@ -150,10 +142,22 @@ class EditAgentForm extends Component {
                           placeholder="Enter Fullname"
                         />
                       </div>
+                      <div class="form-group col-md-4">
+                      <label>Phone Number</label>
+                        <TextField
+                          error={errors.phoneNumber}
+                          onChange={this.onChange}
+                          value={phoneNumber || ''}
+                          field="phoneNumber"
+                          type="text"
+                          className="form-control"
+                          placeholder="Enter Phone Number"
+                        />
+                      </div>
                     </div>
     
                     <div class="form-row">
-                      <div class="form-group col-md-6">
+                      <div class="form-group col-md-4">
                         <label>Email</label>
                         <TextField
                           error={errors.email}
@@ -165,7 +169,7 @@ class EditAgentForm extends Component {
                           placeholder="Enter Email"
                         />
                       </div>
-                      <div class="form-group col-md-6">
+                      <div class="form-group col-md-4">
                         <label>Address</label>
                         <TextField
                           error={errors.address}
@@ -180,7 +184,7 @@ class EditAgentForm extends Component {
                     </div>
     
                     <div class="form-row">
-                      <div class="form-group col-md-6">
+                      <div class="form-group col-md-4">
                         <label>Age</label>
                         <TextField
                           error={errors.age}
@@ -192,7 +196,7 @@ class EditAgentForm extends Component {
                           placeholder="Enter Age"
                         />
                       </div>
-                      <div class="form-group col-md-6">
+                      <div class="form-group col-md-4">
                         <label>BVN</label>
                         <TextField
                           error={errors.bvn}
@@ -207,47 +211,8 @@ class EditAgentForm extends Component {
                     </div>
     
                     <div class="form-row">
-                      <div class="form-group col-md-6">
-                        <label>NIMC</label>
-                        <TextField
-                          error={errors.nimc}
-                          onChange={this.onChange}
-                          value={nimc || ''}
-                          field="nimc"
-                          type="text"
-                          className="mynimc"
-                          id="inputEmail4"
-                          placeholder="Enter NIMC Number"
-                        />
-                      </div>
-                      <div class="form-group col-md-6">
-                        <label>Driver License</label>
-                        <TextField
-                          error={errors.driverLicense}
-                          onChange={this.onChange}
-                          value={driverLicense || ''}
-                          field="driverLicense"
-                          type="text"
-                          className="mydriverLicense"
-                          placeholder="Enter Your Driver License"
-                        />
-                      </div>
-                    </div>
-                    <div class="form-row">
-                      <div class="form-group col-md-6">
-                        <label>IME Number</label>
-                        <TextField
-                          error={errors.imenumber}
-                          onChange={this.onChange}
-                          value={imenumber || ''}
-                          field="imenumber"
-                          type="text"
-                          className="myimenumber"
-                          placeholder="Enter Your IME Number"
-                        />
-                      </div>
-                      <div class="form-group col-md-6">
-                        <label>Password</label>
+                      <div class="form-group col-md-4">
+                      <label>Password</label>
                         <TextField
                           error={errors.password}
                           onChange={this.onChange}
@@ -257,6 +222,75 @@ class EditAgentForm extends Component {
                           className="mypassword"
                           placeholder="Enter Your Password"
                         />
+                      </div>
+                      <div class="form-group col-md-4">
+                      <label>Guarantor Address</label>
+                    <TextField
+                      error={errors.guarantorsAddress}
+                      onChange={this.onChange}
+                      value={guarantorsAddress}
+                      field="guarantorsAddress"
+                      type="text"
+                      className="myguarantorAddress"
+                      placeholder="Enter Guarantor Address"
+                    />
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="form-group col-md-4">
+                      <label>Guarantor Fullname</label>
+                    <TextField
+                      error={errors.guarantorsFullName}
+                      onChange={this.onChange}
+                      value={guarantorsFullName}
+                      field="guarantorsFullName"
+                      type="text"
+                      className="myguarantorFullname"
+                      placeholder="Enter Guarantor Fullname"
+                    />
+                      </div>
+                      <div class="form-group col-md-4">
+                      <label>Guarantor Phone Number</label>
+                    <TextField
+                      error={errors.guarantorsPhonenumber}
+                      onChange={this.onChange}
+                      value={guarantorsPhonenumber}
+                      field="guarantorsPhonenumber"
+                      type="text"
+                      className="myguarantorPhonenumber"
+                      placeholder="Enter Guarantor Phonenumber"
+                    />
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="form-group col-md-4">
+                      <label>Identification Number</label>
+                    <TextField
+                      error={errors.idNumber}
+                      onChange={this.onChange}
+                      value={idNumber}
+                      field="idNumber"
+                      type="text"
+                      className="myidNumber"
+                      placeholder="Enter Identification Number"
+                    />
+                      </div>
+                      <div class="form-group col-md-4">
+                      <label htmlFor="email">Select Means of Identification </label>
+                     <select
+                       className="form-control select2"
+                       onChange={this.onChange}
+                       name="meansOfId"
+                       value={meansOfId}
+                     >
+                       {
+                              meansOfIdentificationList.map(idMeans => (
+                                <option value={idMeans}>
+                                  {idMeans}
+                                </option>
+                              ))
+                          }
+                     </select>
                       </div>
                     </div>
                   </form>

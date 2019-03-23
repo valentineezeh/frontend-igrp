@@ -34,7 +34,7 @@ class DashboardOverview extends React.Component {
                 <h2>
                   <i className="fas fa-truck" /> {driverLength}
                 </h2>
-                <h4>Drivers</h4>
+                <h4>Vehicles</h4>
               </div>
             </div>
           </div>

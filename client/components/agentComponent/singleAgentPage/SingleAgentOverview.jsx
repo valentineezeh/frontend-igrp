@@ -118,7 +118,7 @@ class SingleAgentOverview extends React.Component {
                   role="button"
                   onClick={this.onDeleteAgent}
                   >
-                  <i className="fa fa-male">Delete Agent</i>
+                  <i className="fas fa-times">{' '}Delete Agent</i>
                 </Link>
               </div>
 
@@ -138,7 +138,6 @@ class SingleAgentOverview extends React.Component {
                 <Link
                   id="anchor"
                   className="btn  btn-white"
-                  href="editAgent.html"
                   role="button"
                   to="/edit-agent"
                   
@@ -175,15 +174,39 @@ class SingleAgentOverview extends React.Component {
                 <p>{this.props.singleAgent.email}</p>
               </div>
               <div className="form-group col-md-4">
-                <label for="inputPassword4">Nimc</label>
-                <p>{this.props.singleAgent.nimc}</p>
+                <label for="inputEmail4">Age</label>
+                <p>{this.props.singleAgent.age}</p>
+              </div> 
+            </div>
+            <div className="form-row">
+            <div className="form-group col-md-4">
+                <label for="inputPassword4">Mean Of Identification</label>
+                <p>{this.props.singleAgent.meansOfId}</p>
+              </div>
+              <div className="form-group col-md-4">
+                <label for="inputPassword4">ID Number</label>
+                <p>{this.props.singleAgent.idNumber}</p>
+              </div>
+              <div className="form-group col-md-4">
+                <label for="inputPassword4">Guarantor Fullname</label>
+                <p>{this.props.singleAgent.guarantorsFullName}</p>
               </div>
             </div>
             <div className="form-row">
               <div className="form-group col-md-4">
-                <label for="inputEmail4">Age</label>
-                <p>{this.props.singleAgent.age}</p>
+                <label for="inputEmail4">Guarantor Phone Number</label>
+                <p>{this.props.singleAgent.guarantorsPhonenumber}</p>
               </div>
+              <div className="form-group col-md-4">
+                <label for="inputPassword4">Guarantor Address</label>
+                <p>{this.props.singleAgent.guarantorsAddress}</p>
+              </div>
+              <div className="form-group col-md-4">
+                <label for="inputEmail4">Deactivate</label>
+                <p>{convertedStatus}</p>
+              </div>
+            </div>
+            <div className="form-row">
               <div className="form-group col-md-4">
                 <label for="inputPassword4">Role</label>
                 <p>{this.props.singleAgent.role}</p>
@@ -191,12 +214,6 @@ class SingleAgentOverview extends React.Component {
               <div className="form-group col-md-4">
                 <label for="inputPassword4">Date Joined</label>
                 <p>{moment(this.props.singleAgent.date).format("MM-DD-YY")}</p>
-              </div>
-            </div>
-            <div className="form-row">
-              <div className="form-group col-md-4">
-                <label for="inputEmail4">Deactivate</label>
-                <p>{convertedStatus}</p>
               </div>
             </div>
           </div>

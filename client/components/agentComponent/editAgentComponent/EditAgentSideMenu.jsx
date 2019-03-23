@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 class EditAgentSideMenu extends React.Component {
   render() {
     const { agents } = this.props.allAgents;
-    const driverLength = this.props.allDrivers.length;
+    const vehicleLength = this.props.allVehicles.length;
     const transactionLength = this.props.allTransactions.length;
     return (
       <div>
@@ -24,8 +24,8 @@ class EditAgentSideMenu extends React.Component {
             </Link>
 
             <Link to="/drivers" className="list-group-item">
-              <i className="fas fa-truck" /> Drivers{" "}
-              <span className="badge">{driverLength}</span>
+              <i className="fas fa-truck" /> Vehicles{" "}
+              <span className="badge">{vehicleLength}</span>
             </Link>
 
             <Link to="transactions" className="list-group-item">

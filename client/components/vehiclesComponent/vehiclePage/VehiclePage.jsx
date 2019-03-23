@@ -2,16 +2,16 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import DriverSideMenu from "./DriverSideMenu.jsx";
-import DriverList from "./DriverList.jsx";
+import VehicleSideMenu from "./VehicleSideMenu.jsx";
+import VehicleList from "./VehicleList.jsx";
 import fetchAgents from "../../../actions/agentsAction";
-import fetchDrivers from "../../../actions/driversAction";
+import fetchVehicles from "../../../actions/vehiclesAction";
 import fetchTransactions from "../../../actions/transactionsAction";
 
-class DriverPage extends React.Component {
+class VehiclePage extends React.Component {
   componentDidMount() {
     this.props.fetchAgents();
-    this.props.fetchDrivers();
+    this.props.fetchVehicles();
     this.props.fetchTransactions();
   }
   render() {
@@ -25,8 +25,8 @@ class DriverPage extends React.Component {
                   <span
                     className="glyphicon glyphicon-cog"
                     aria-hidden="true"
-                  />
-                  Dashboard <small>Manage Your Site</small>
+                  /> {'  '}
+                  Manage Vehicle
                 </h1>
               </div>
             </div>
@@ -37,12 +37,12 @@ class DriverPage extends React.Component {
           <div class="container">
             <ol class="breadcrumb">
               <li>
-                <a href="index.html">Dashboard</a>
+                View all vehicles
               </li>
               <li>
                 {" "}
                 <Link className="btn btn-danger btn-sm " to="create-driver">
-                  Create Driver
+                  Create Vehicle
                 </Link>
               </li>
             </ol>
@@ -51,14 +51,14 @@ class DriverPage extends React.Component {
         <section>
           <div className="container">
             <div className="row">
-              <DriverSideMenu
+              <VehicleSideMenu
                 allAgents={this.props.allAgents}
-                allDrivers={this.props.allDrivers}
+                allVehicles={this.props.allVehicles}
                 allTransactions={this.props.allTransactions}
               />
-              <DriverList
+              <VehicleList
                 allAgents={this.props.allAgents}
-                allDrivers={this.props.allDrivers}
+                allVehicles={this.props.allVehicles}
                 allTransactions={this.props.allTransactions}
               />
             </div>
@@ -70,9 +70,9 @@ class DriverPage extends React.Component {
   }
 }
 
-DriverPage.propTypes = {
+VehiclePage.propTypes = {
   allAgents: PropTypes.array.isRequired,
-  allDrivers: PropTypes.array.isRequired,
+  allVehicles: PropTypes.array.isRequired,
   allTransactions: PropTypes.array.isRequired,
   fetchAgents: PropTypes.func.isRequired,
   fetchDrivers: PropTypes.func.isRequired,
@@ -82,12 +82,12 @@ DriverPage.propTypes = {
 const mapStateToProps = state => {
   return {
     allAgents: state.allAgents,
-    allDrivers: state.allDrivers,
+    allVehicles: state.allVehicles,
     allTransactions: state.allTransactions
   };
 };
 
 export default connect(
   mapStateToProps,
-  { fetchAgents, fetchDrivers, fetchTransactions }
-)(DriverPage);
+  { fetchAgents, fetchVehicles, fetchTransactions }
+)(VehiclePage);

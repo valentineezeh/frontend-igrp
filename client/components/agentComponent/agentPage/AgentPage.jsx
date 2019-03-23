@@ -5,12 +5,12 @@ import { Link } from "react-router-dom";
 import AgentSideMenu from "./AgentSideMenu.jsx";
 import AgentList from "./AgentList.jsx";
 import fetchAgents from "../../../actions/agentsAction";
-import fetchDrivers from "../../../actions/driversAction";
+import fetchVehicles from "../../../actions/vehiclesAction";
 import fetchTransactions from "../../../actions/transactionsAction";
 
 class AgentPage extends React.Component {
   componentDidMount() {
-    this.props.fetchDrivers();
+    this.props.fetchVehicles();
     this.props.fetchTransactions();
   }
 
@@ -53,7 +53,7 @@ class AgentPage extends React.Component {
             <div className="row">
               <AgentSideMenu
                 allAgents={this.props.allAgents}
-                allDrivers={this.props.allDrivers}
+                allVehicles={this.props.allVehicles}
                 allTransactions={this.props.allTransactions}
               />
               <AgentList allAgents={this.props.allAgents} />
@@ -68,7 +68,7 @@ class AgentPage extends React.Component {
 
 AgentPage.propTypes = {
   allAgents: PropTypes.shape({}).isRequired,
-  allDrivers: PropTypes.shape({}).isRequired,
+  allVehicles: PropTypes.shape({}).isRequired,
   allTransactions: PropTypes.shape({}).isRequired,
   fetchAgents: PropTypes.func.isRequired,
   fetchDrivers: PropTypes.func.isRequired,
@@ -78,14 +78,14 @@ AgentPage.propTypes = {
 const mapStateToProps = state => {
   return {
     allAgents: state.allAgents,
-    allDrivers: state.allDrivers,
+    allVehicles: state.allVehicles,
     allTransactions: state.allTransactions
   };
 };
 
 const mapDispatchToProps = dispatch => ({
   fetchAgents: () => dispatch(fetchAgents()),
-  fetchDrivers: () => dispatch(fetchDrivers()),
+  fetchVehicles: () => dispatch(fetchVehicles()),
   fetchTransactions: () => dispatch(fetchTransactions())
 });
 

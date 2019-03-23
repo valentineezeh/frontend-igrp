@@ -6,35 +6,41 @@ class TransactionList extends React.Component {
   render() {
     const transactions = this.props.allTransactions;
     const data = {
-      colums: [
+      columns: [
         {
           label: 'Agent Name',
           field: 'agentName',
-          sort: 'dsc',
+          sort: 'desc',
           width: 150
         },
         {
           label: 'Driver Name',
           field: 'driverName',
-          sort: 'dsc',
+          sort: 'desc',
           width: 150
         },
         {
           label: 'Agent Phone Number',
           field: 'agentNumber',
-          sort: 'dsc',
+          sort: 'desc',
           width: 150
         },
         {
           label: 'Vehicle Number',
           field: 'vehicleNumber',
-          sort: 'dsc',
+          sort: 'desc',
           width: 150
         },
         {
           label: 'Date',
           field: 'date',
-          sort: 'dsc',
+          sort: 'desc',
+          width: 150
+        },
+        {
+          label: 'Time',
+          field: 'time',
+          sort: 'desc',
           width: 150
         },
       ],
@@ -42,16 +48,17 @@ class TransactionList extends React.Component {
         return {
           agentName: transaction.agentName,
           driverName: transaction.driverName,
-          agentNumber: transaction.agentNumber,
+          agentNumber: `${0}${transaction.agentNumber}`,
           vehicleNumber: transaction.vehicleNumber,
-          date: moment(transaction.date).format("MM-DD-YY")
+          date: moment(transaction.date).format("MM-DD-YY"),
+          time: moment(transaction.date).format("HH-mm-ss")
         }
       })
     }
 
     return (
       <div class="col-md-9">
-        <div class="panel panel-default">
+        <div class="panel panel-default my-auto" id="transaction">
           <div class="panel-heading main-color-bg">
             <h3 class="panel-title">All Transactions</h3>
           </div>
@@ -60,6 +67,7 @@ class TransactionList extends React.Component {
         striped
         bordered
         small
+        order={['agentName', 'desc' ]}
         data={data}
         /> 
           </div>

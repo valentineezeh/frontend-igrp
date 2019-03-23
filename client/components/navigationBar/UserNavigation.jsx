@@ -68,7 +68,7 @@ class UserNavigation extends React.Component {
                   <Link to="/agents">Agents</Link>
                 </li>
                 <li>
-                  <Link to="/drivers">Drivers</Link>
+                  <Link to="/vehicles">Vehicles</Link>
                 </li>
                 <li>
                   <Link to="/transactions">Transactions</Link>

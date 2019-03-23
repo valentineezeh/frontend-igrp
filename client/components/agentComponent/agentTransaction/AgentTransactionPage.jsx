@@ -5,12 +5,12 @@ import { Link } from "react-router-dom";
 import AgentTransactionSideMenu from "./AgentTransactionSideMenu.jsx";
 import AgentTransactionTable from './AgentTransactionTable.jsx'
 import fetchAgents from '../../../actions/agentsAction';
-import fetchDrivers from '../../../actions/driversAction';
+import fetchVehicles from '../../../actions/vehiclesAction';
 import fetchTransactions from '../../../actions/transactionsAction';
 
 class AgentTransactionPage extends React.Component {
   componentDidMount() {
-    this.props.fetchDrivers();
+    this.props.fetchVehicles();
     this.props.fetchTransactions();
   }
 
@@ -47,7 +47,7 @@ class AgentTransactionPage extends React.Component {
             <div className="row">
               <AgentTransactionSideMenu
                 allAgents={this.props.allAgents}
-                allDrivers={this.props.allDrivers}
+                allVehicles={this.props.allVehicles}
                 allTransactions={this.props.allTransactions}
               />
               <AgentTransactionTable />
@@ -68,9 +68,9 @@ const mapStateToProps = state => {
   return {
     agentTransact: state.singleAgentAllTransaction,
     allAgents: state.allAgents,
-    allDrivers: state.allDrivers,
+    allVehicles: state.allVehicles,
     allTransactions: state.allTransactions
   };
 };
 
-export default connect(mapStateToProps, { fetchAgents, fetchDrivers, fetchTransactions })(AgentTransactionPage);
+export default connect(mapStateToProps, { fetchAgents, fetchVehicles, fetchTransactions })(AgentTransactionPage);

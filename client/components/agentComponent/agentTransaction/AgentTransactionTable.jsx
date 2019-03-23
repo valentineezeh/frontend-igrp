@@ -39,13 +39,20 @@ class AgentTransactionTable extends React.Component {
                     sort: 'asc',
                     width: 150
                 },
+                {
+                    label: 'Time of Transaction',
+                    field: 'time',
+                    sort: 'asc',
+                    width: 150
+                },
             ],
             rows: allAgentTransaction.allAgentTransactions.map(transactions => {
                 return {
                     agentName: transactions.agentName,
                     agentNumber: transactions.agentNumber,
                     vehicleNumber: transactions.vehicleNumber,
-                    date: moment(transactions.date).format("MM-DD-YY")
+                    date: moment(transactions.date).format("MM-DD-YY"),
+                    time: moment(transactions.date).format("HH-mm-ss"),
                 }
             })
         }; 

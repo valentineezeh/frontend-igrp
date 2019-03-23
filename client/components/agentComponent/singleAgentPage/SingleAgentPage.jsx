@@ -34,11 +34,7 @@ class SingleAgentPage extends React.Component {
         <section>
           <div className="container">
             <div className="row">
-              <SingleAgentSideMenu
-                allAgents={this.props.allAgents}
-                allDrivers={this.props.allDrivers}
-                allTransactions={this.props.allTransactions}
-              />
+              <SingleAgentSideMenu/>
               <SingleAgentOverview singleAgent={this.props.singleAgent} />
             </div>
           </div>
