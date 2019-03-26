@@ -10,7 +10,9 @@ const routes = {
     DEACTIVATEAGENT: '/deactivate',
     AGENTTRANSACTIONS: '/agentTransaction',
     DELETEAGENT: '/deleteAgent',
-    SINGLEVEHICLE: '/singleVehicle'
+    SINGLEVEHICLE: '/singleVehicle',
+    UPDATEAGENT: '/updateAgent',
+    UPDATEVEHICLE: '/updateVehicle'
 
 };
 

@@ -9,16 +9,20 @@ import fetchSingleVehicle from '../../../actions/getSingleVehicleAction';
 class SingleVehicleOverview extends React.Component {
   constructor(props) {
     super(props);
+    this.onEditVehicle = this.onEditVehicle.bind(this);
   }
 
   componentDidMount(){
     const vrtID = Cookie.get('vrtID');
-    const { fetchSingleVehicle } = this.props;
-    fetchSingleVehicle(vrtID);
-
+    const { FetchSingleVehicle } = this.props;
+    FetchSingleVehicle(vrtID);
   }
+
+  onEditVehicle() {
+    window.location.href = "/edit-vehicle"
+  }
+
   render() {
-    // const convertedStatus = "" + agentStatus;
     const { singleVehicle } = this.props;
     const converted = '' + singleVehicle.deactivate
 
@@ -110,6 +114,19 @@ class SingleVehicleOverview extends React.Component {
                 <p>{moment(singleVehicle.date).format("MM-DD-YY")}</p>
               </div>
             </div>
+            
+            <div className="text-center">
+            <hr />
+            <Link
+                    to="/edit-vehicle"
+                    className="btn btn-danger"
+                    role="button"
+                    id="anchor"
+                  >
+                      {' '}
+                      Edit Vehicle
+                  </Link>
+            </div>
           </div>
         </div>
       </div>
@@ -127,8 +144,12 @@ const mapStateToProps = state => {
   };
 };
 
+const mapDispatchToProps = dispatch => ({
+  FetchSingleVehicle: vrtID => dispatch(fetchSingleVehicle(vrtID))
+})
+
 
 export default connect(
   mapStateToProps,
-  { fetchSingleVehicle }
+  mapDispatchToProps
 )(SingleVehicleOverview);

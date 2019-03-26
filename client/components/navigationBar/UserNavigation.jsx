@@ -65,13 +65,13 @@ class UserNavigation extends React.Component {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/agents">Agents</Link>
+                  <a href="/agents">Agents</a>
                 </li>
                 <li>
-                  <Link to="/vehicles">Vehicles</Link>
+                  <a href="/vehicles">Vehicles</a>
                 </li>
                 <li>
-                  <Link to="/transactions">Transactions</Link>
+                  <a href="/transactions">Transactions</a>
                 </li>
               </ul>
               <ul className="nav navbar-nav navbar-right">

@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import isEmpty from 'is-empty';
 import TextField from '../../commons/TextField.jsx';
-import SubmitButton from '../../commons/SubmitButton.jsx';
 import fetchSingleAgent from '../../../actions/getSingleAgentAction';
 import updateAgentInput from '../../../middleware/updateAgentInput';
+import updateAgentRequest, { deleteUpdateAgentErrorMessages } from '../../../actions/updateAgentAction';
+import ErrorAlertNotification from '../../commons/ErrorAlertNotification.jsx';
 
 class EditAgentForm extends Component {
     constructor(props) {
@@ -26,9 +28,9 @@ class EditAgentForm extends Component {
             errors: {},
             isLoading: false,
         }
-        this.onEditAgent = this.onEditAgent.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-        this.onChange = this.onChange.bind(this)
+        this.onChange = this.onChange.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
     }
   
   /**
@@ -87,12 +89,15 @@ class EditAgentForm extends Component {
     event.preventDefault();
     if (this.isValid()) {
       this.setState({ errors: {}, isLoading: true });
+      const { updateAgentRequest } = this.props;
+      updateAgentRequest(this.state);
     }
   }
 
-  onEditAgent(event) {
-      event.preventDefault();
-      this.setState({isLoading: true})
+  handleDelete(){
+    const { deleteUpdateAgentErrorMessages } = this.props;
+    deleteUpdateAgentErrorMessages();
+    this.setState({ isLoading: false });
   }
 
   isValid() {
@@ -119,7 +124,13 @@ class EditAgentForm extends Component {
             errors,
             isLoading,
         } = this.state;
+
+        const { error, success } = this.props;
+
         const meansOfIdentificationList = ['Select', 'voters card','international passport','national id card','drivers license']
+        if(success) {
+          window.location.href = "/agents"
+        }
         const editAgentForm = (
             <div>
             <div class="col-md-9">
@@ -128,6 +139,12 @@ class EditAgentForm extends Component {
                   <h3 class="panel-title">Update Agents Form</h3>
                 </div>
                 <div class="panel-body">
+                {!isEmpty(error) && (
+              <ErrorAlertNotification
+                errors={error}
+                onClick={this.handleDelete}
+              />
+              )}
                   <form>
                     <div class="form-row">
                       <div class="form-group col-md-4">
@@ -297,13 +314,33 @@ class EditAgentForm extends Component {
                   <br />
                 </div>
                 <div class="form-group text-center">
-                      <SubmitButton
-                        type="submit"
-                        className="mybutton"
-                        onClick={this.onSubmit}
-                        label="Update Agent"
-                      />
-                    </div>
+                {
+                    isLoading ? (
+                    <a
+                    href="#"
+                    type="submit"
+                    className="btn btn-danger"
+                  >
+                  <i className="fa fa-spinner fa-spin" />
+                  {' '} 
+                  Update Agent
+                  </a>
+                  
+
+                    ) : 
+                    (
+                    <a
+                    href="#"
+                    type="submit"
+                    className="btn btn-danger"
+                    onClick={this.onSubmit}
+                  >
+                      {' '}
+                      Update Agent
+                  </a>
+                    )
+                  }
+                </div>
               </div>
             </div>
           </div> 
@@ -318,8 +355,10 @@ EditAgentForm.propTypes = {
 
 const mapStateToProps = state => {
     return {
-      singleAgent: state.singleAgentRequests.singleAgent
+      singleAgent: state.singleAgentRequests.singleAgent,
+      error: state.updateAgent.error,
+      success: state.updateAgent.success
     };
   };
 
-export default connect(mapStateToProps, { fetchSingleAgent })(EditAgentForm);
+export default connect(mapStateToProps, { fetchSingleAgent, updateAgentRequest, deleteUpdateAgentErrorMessages })(EditAgentForm);

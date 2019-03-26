@@ -1,8 +1,16 @@
 import React from 'react';
-import { MDBDataTable } from 'mdbreact';
+import { MDBDataTable, MDBBtn } from 'mdbreact';
 import moment from '../../middleware/moment';
 
 class LatestAgent extends React.Component {
+    constructor(props){
+        super(props)
+        this.onSample = this.onSample.bind(this);
+    }
+    onSample(event) {
+        event.preventDefault();
+        console.log('I got here')
+    }
     render() {
         const { agents } = this.props.allAgents;
         const data = {
@@ -30,6 +38,12 @@ class LatestAgent extends React.Component {
                     field: 'status',
                     sort: 'asc',
                     width: 150
+                },
+                {
+                    label: 'Action',
+                    field: 'action',
+                    sort: 'asc',
+                    width: 150
                 }
             ],
             rows: agents.map(agent => {
@@ -38,11 +52,16 @@ class LatestAgent extends React.Component {
                 email: agent.email,
                 date: moment(agent.date).format("MM-DD-YY"),
                 status: agent.deactivate.toString(),
+                action: <MDBBtn 
+                color="red" 
+                size="sm"
+                onClick={this.onSample}
+                >View</MDBBtn>
               }
             })
         };
     return (
-      <MDBDataTable
+      <MDBDataTable btn
         striped
         bordered
         small

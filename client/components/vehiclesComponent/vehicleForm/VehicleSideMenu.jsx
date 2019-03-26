@@ -29,17 +29,17 @@ class VehicleSideMenu extends React.Component {
               </i>
             </Link>
 
-            <Link to="/agent" className="list-group-item" id="agent">
+            <Link to="/agents" className="list-group-item" id="agent">
               <i className="fas fa-users" /> Agents{" "}
               <span className="badge">{agents.length}</span>
             </Link>
 
-            <Link to="/driver" className="list-group-item">
-              <i className="fas fa-truck" /> Drivers{" "}
+            <Link to="/vehicles" className="list-group-item">
+              <i className="fas fa-truck" /> Vehicles{" "}
               <span className="badge">{vehicleLength}</span>
             </Link>
 
-            <Link to="transaction.html" className="list-group-item">
+            <Link to="transactions" className="list-group-item">
               <i class="far fa-newspaper" /> Transactions
               <span className="badge">{transactionLength}</span>
             </Link>

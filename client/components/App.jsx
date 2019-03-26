@@ -14,6 +14,7 @@ import SingleAgentPage from "./agentComponent/singleAgentPage/SingleAgentPage.js
 import AgentTransactionPage from "./agentComponent/agentTransaction/AgentTransactionPage.jsx";
 import EditAgentPage from './agentComponent/editAgentComponent/EditAgentPage.jsx';
 import SingleVehiclePage from './vehiclesComponent/singleVehiclePage/SingleVehiclePage.jsx';
+import EditVehiclePage from './vehiclesComponent/updateVehicleComponents/EditVehiclePage.jsx'
 
 class App extends React.Component {
   render() {
@@ -55,6 +56,11 @@ class App extends React.Component {
             exact
             path="/single-vehicle"
             component={privateRoute(SingleVehiclePage)}
+          />
+          <Route
+            exact
+            path="/edit-vehicle"
+            component={privateRoute(EditVehiclePage)}
           />
         </div>
         <FooterBar />
