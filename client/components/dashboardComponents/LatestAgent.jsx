@@ -1,6 +1,6 @@
 import React from 'react';
 import { MDBDataTable } from 'mdbreact';
-import moment from '../../middleware/moment';
+import datetime from 'node-datetime';
 
 class LatestAgent extends React.Component {
     render() {
@@ -30,14 +30,15 @@ class LatestAgent extends React.Component {
                     field: 'status',
                     sort: 'asc',
                     width: 150
-                }
+                },
             ],
             rows: agents.map(agent => {
+                const convertToString = '' + agent.deactivate
               return {
                 name: agent.fullname,
                 email: agent.email,
-                date: moment(agent.date).format("MM-DD-YY"),
-                status: agent.deactivate.toString(),
+                date: datetime.create(agent.date).format('m/d/y'),
+                status: convertToString,
               }
             })
         };

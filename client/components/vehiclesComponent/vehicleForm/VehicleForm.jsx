@@ -5,7 +5,6 @@ import PropTypes from "prop-types";
 import isEmpty from 'is-empty';
 import validateInput from "../../../middleware/vehicleInputValidate";
 import TextField from "../../commons/TextField.jsx";
-import SubmitButton from "../../commons/SubmitButton.jsx";
 import createVehicle, { deleteVehicleErrorMessages } from "../../../actions/createVehicleAction";
 import ErrorAlertNotification from '../../commons/ErrorAlertNotification.jsx';
 
@@ -17,7 +16,6 @@ class VehicleForm extends React.Component {
     super(props);
     this.state = {
       phoneNumber: "",
-      driversLicence: "",
       vehicleType: "sample",
       vehicleNumber: "",
       plateNumber: "",
@@ -75,7 +73,6 @@ class VehicleForm extends React.Component {
    */
   onSubmit(event) {
     event.preventDefault();
-    console.log('I got here...')
     if (this.isValid()) {
       this.setState({ errors: {}, isLoading: true });
       this.props.createVehicle(this.state);
@@ -95,7 +92,6 @@ class VehicleForm extends React.Component {
       vehicleNumber,
       vehicleType,
       plateNumber,
-      driversLicence,
       vehicleOwnerAdress,
       vehicleOwnerName,
       chasisNo,
@@ -120,7 +116,7 @@ class VehicleForm extends React.Component {
 
     const driverForm = (
       <div>
-        <div className="col-md-9">
+        <div className="col-md-9" id="transaction">
           <div className="panel panel-default">
             <div className="panel-heading main-color-bg">
               <h3 className="panel-title">Vehicles</h3>
@@ -264,20 +260,6 @@ class VehicleForm extends React.Component {
                   </div>
                 </div>
                 <div className="form-row">
-                  <div className="form-group col-md-4">
-                    <label>Driver's Licence</label>
-                    <TextField
-                      error={errors.driversLicence}
-                      onChange={this.onChange}
-                      value={driversLicence}
-                      field="driversLicence"
-                      type="text"
-                      className="mydriverlicence"
-                      placeholder="Driver's Licence"
-                    />
-                  </div>
-                </div>
-                <div className="form-row">
                 <div className="col-md-4 form-group">
                      <label htmlFor="email">Select Vehicle Type</label>
                      <select
@@ -346,7 +328,7 @@ class VehicleForm extends React.Component {
                   >
                   <i className="fa fa-spinner fa-spin" />
                   {' '} 
-                  Create Driver
+                  Create Vehicle
                   </a>
                   
 
@@ -359,7 +341,7 @@ class VehicleForm extends React.Component {
                     onClick={this.onSubmit}
                   >
                       {' '}
-                      Create Driver
+                      Create Vehicle
                   </a>
                     )
                   }

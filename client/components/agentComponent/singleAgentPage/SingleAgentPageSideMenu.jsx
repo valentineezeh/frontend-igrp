@@ -7,6 +7,8 @@ class SingleAgentPageSideMenu extends React.Component {
     const { agents } = this.props.allAgents;
     const vehicleLength = this.props.allVehicles.length;
     const transactionLength = this.props.allTransactions.length;
+    const { totalAmount } = this.props.walletBalance;
+
     return (
       <div>
         <div class="col-md-3">
@@ -33,6 +35,11 @@ class SingleAgentPageSideMenu extends React.Component {
               <i class="far fa-newspaper" /> Transactions
               <span className="badge">{transactionLength}</span>
             </Link>
+
+            <Link to="#" className="list-group-item">
+              <i class="fas fa-wallet" /> Wallet
+              <span className="badge">{`NGN `}{totalAmount}</span>
+            </Link>
           </div>
         </div>
       </div>
@@ -44,7 +51,8 @@ const mapStateToProps = state => {
   return {
     allAgents: state.allAgents,
     allVehicles: state.allVehicles,
-    allTransactions: state.allTransactions
+    allTransactions: state.allTransactions,
+    walletBalance: state.walletBalance
   };
 };
 

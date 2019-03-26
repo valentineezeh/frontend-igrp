@@ -1,6 +1,6 @@
 import React from "react";
 import { MDBDataTable } from 'mdbreact';
-import moment from '../../middleware/moment';
+import datetime from 'node-datetime';
 
 class TransactionList extends React.Component {
   render() {
@@ -10,48 +10,41 @@ class TransactionList extends React.Component {
         {
           label: 'Agent Name',
           field: 'agentName',
-          sort: 'desc',
-          width: 150
-        },
-        {
-          label: 'Driver Name',
-          field: 'driverName',
-          sort: 'desc',
+          sort: 'asc',
           width: 150
         },
         {
           label: 'Agent Phone Number',
           field: 'agentNumber',
-          sort: 'desc',
+          sort: 'asc',
           width: 150
         },
         {
           label: 'Vehicle Number',
           field: 'vehicleNumber',
-          sort: 'desc',
+          sort: 'asc',
           width: 150
         },
         {
           label: 'Date',
           field: 'date',
-          sort: 'desc',
+          sort: 'asc',
           width: 150
         },
         {
           label: 'Time',
           field: 'time',
-          sort: 'desc',
+          sort: 'asc',
           width: 150
         },
       ],
       rows: transactions.map(transaction => {
         return {
           agentName: transaction.agentName,
-          driverName: transaction.driverName,
           agentNumber: `${0}${transaction.agentNumber}`,
           vehicleNumber: transaction.vehicleNumber,
-          date: moment(transaction.date).format("MM-DD-YY"),
-          time: moment(transaction.date).format("HH-mm-ss")
+          date: datetime.create(transaction.date).format('m/d/y'),
+          time: datetime.create(transaction.date).format('H:M:S')
         }
       })
     }
@@ -67,7 +60,6 @@ class TransactionList extends React.Component {
         striped
         bordered
         small
-        order={['agentName', 'desc' ]}
         data={data}
         /> 
           </div>

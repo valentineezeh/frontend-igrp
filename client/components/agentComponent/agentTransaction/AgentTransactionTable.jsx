@@ -2,8 +2,9 @@ import React from 'react';
 import { MDBDataTable } from 'mdbreact';
 import { connect } from 'react-redux';
 import Cookie from 'cookies-js';
+import datetime from 'node-datetime';
 import agentTransactions from '../../../actions/agentTransactionsAction';
-import moment from '../../../middleware/moment';
+
 
 class AgentTransactionTable extends React.Component {
     componentDidMount(){
@@ -51,14 +52,14 @@ class AgentTransactionTable extends React.Component {
                     agentName: transactions.agentName,
                     agentNumber: transactions.agentNumber,
                     vehicleNumber: transactions.vehicleNumber,
-                    date: moment(transactions.date).format("MM-DD-YY"),
-                    time: moment(transactions.date).format("HH-mm-ss"),
+                    date: datetime.create(transactions.date).format('m/d/y'),
+                    time: datetime.create(transactions.date).format('H:S:M'),
                 }
             })
         }; 
         return (
 <div class="col-md-9">
-        <div class="panel panel-default">
+        <div class="panel panel-default" id="transaction">
           <div class="panel-heading main-color-bg">
             <h3 class="panel-title">All Agents</h3>
           </div>

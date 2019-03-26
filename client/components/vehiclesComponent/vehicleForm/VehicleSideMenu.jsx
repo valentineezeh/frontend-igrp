@@ -5,11 +5,13 @@ import { connect } from 'react-redux';
 import fetchAgents from '../../../actions/agentsAction';
 import fetchVehicles from '../../../actions/vehiclesAction';
 import fetchTransactions from '../../../actions/transactionsAction';
+import getWalletBalanceRequest from '../../../actions/walletActions/getWalletBalance';
 
 class VehicleSideMenu extends React.Component {
   componentDidMount() {
     this.props.fetchVehicles();
     this.props.fetchTransactions();
+    this.props.getWalletBalanceRequest();
   }
   componentWillMount() {
     this.props.fetchAgents();
@@ -18,6 +20,8 @@ class VehicleSideMenu extends React.Component {
     const { agents } = this.props.allAgents;
     const vehicleLength = this.props.allVehicles.length;
     const transactionLength = this.props.allTransactions.length;
+    const { totalAmount } = this.props.walletBalance;
+
     return (
       <div>
         <div class="col-md-3">
@@ -29,19 +33,24 @@ class VehicleSideMenu extends React.Component {
               </i>
             </Link>
 
-            <Link to="/agent" className="list-group-item" id="agent">
+            <Link to="/agents" className="list-group-item" id="agent">
               <i className="fas fa-users" /> Agents{" "}
               <span className="badge">{agents.length}</span>
             </Link>
 
-            <Link to="/driver" className="list-group-item">
-              <i className="fas fa-truck" /> Drivers{" "}
+            <Link to="/vehicles" className="list-group-item">
+              <i className="fas fa-truck" /> Vehicles{" "}
               <span className="badge">{vehicleLength}</span>
             </Link>
 
-            <Link to="transaction.html" className="list-group-item">
+            <Link to="transactions" className="list-group-item">
               <i class="far fa-newspaper" /> Transactions
               <span className="badge">{transactionLength}</span>
+            </Link>
+
+            <Link to="transactions" className="list-group-item">
+              <i class="fas fa-wallet" /> Wallet
+              <span className="badge">{`NGN `}{totalAmount}</span>
             </Link>
           </div>
         </div>
@@ -56,18 +65,20 @@ VehicleSideMenu.propTypes = {
   allTransactions: PropTypes.array.isRequired,
   fetchAgents: PropTypes.func.isRequired,
   fetchDrivers: PropTypes.func.isRequired,
-  fetchTransactions: PropTypes.func.isRequired
+  fetchTransactions: PropTypes.func.isRequired,
+  getWalletBalanceRequest: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => {
   return {
     allAgents: state.allAgents,
     allVehicles: state.allVehicles,
-    allTransactions: state.allTransactions
+    allTransactions: state.allTransactions,
+    walletBalance: state.walletBalance
   };
 };
 
 export default connect(
   mapStateToProps,
-  { fetchAgents, fetchVehicles, fetchTransactions }
+  { fetchAgents, fetchVehicles, fetchTransactions, getWalletBalanceRequest }
 )(VehicleSideMenu);

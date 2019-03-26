@@ -7,11 +7,13 @@ import AgentTransactionTable from './AgentTransactionTable.jsx'
 import fetchAgents from '../../../actions/agentsAction';
 import fetchVehicles from '../../../actions/vehiclesAction';
 import fetchTransactions from '../../../actions/transactionsAction';
+import getWalletBalanceRequest from '../../../actions/walletActions/getWalletBalance';
 
 class AgentTransactionPage extends React.Component {
   componentDidMount() {
     this.props.fetchVehicles();
     this.props.fetchTransactions();
+    this.props.getWalletBalanceRequest();
   }
 
   componentWillMount() {
@@ -49,6 +51,7 @@ class AgentTransactionPage extends React.Component {
                 allAgents={this.props.allAgents}
                 allVehicles={this.props.allVehicles}
                 allTransactions={this.props.allTransactions}
+                walletBalance={this.props.walletBalance}
               />
               <AgentTransactionTable />
             </div>
@@ -61,7 +64,8 @@ class AgentTransactionPage extends React.Component {
 }
 
 AgentTransactionPage.propTypes = {
-  agentTransact: PropTypes.shape({}).isRequired
+  agentTransact: PropTypes.shape({}).isRequired,
+  getWalletBalanceRequest: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => {
@@ -69,8 +73,9 @@ const mapStateToProps = state => {
     agentTransact: state.singleAgentAllTransaction,
     allAgents: state.allAgents,
     allVehicles: state.allVehicles,
-    allTransactions: state.allTransactions
+    allTransactions: state.allTransactions,
+    walletBalance: state.walletBalance
   };
 };
 
-export default connect(mapStateToProps, { fetchAgents, fetchVehicles, fetchTransactions })(AgentTransactionPage);
+export default connect(mapStateToProps, { fetchAgents, fetchVehicles, fetchTransactions, getWalletBalanceRequest })(AgentTransactionPage);

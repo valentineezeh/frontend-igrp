@@ -7,11 +7,13 @@ import AgentList from "./AgentList.jsx";
 import fetchAgents from "../../../actions/agentsAction";
 import fetchVehicles from "../../../actions/vehiclesAction";
 import fetchTransactions from "../../../actions/transactionsAction";
+import getWalletBalanceRequest from '../../../actions/walletActions/getWalletBalance'
 
 class AgentPage extends React.Component {
   componentDidMount() {
     this.props.fetchVehicles();
     this.props.fetchTransactions();
+    this.props.getWalletBalanceRequest();
   }
 
   componentWillMount() {
@@ -41,9 +43,15 @@ class AgentPage extends React.Component {
               </li>
               <li>
                 {" "}
-                <Link className="btn btn-danger btn-sm " to="create-agent">
+                <a className="btn btn-danger btn-sm " href="confirm-user">
+                  Verify Agent
+                </a>
+              </li>
+              <li>
+                {" "}
+                <a className="btn btn-danger btn-sm " href="create-agent">
                   Create Agent
-                </Link>
+                </a>
               </li>
             </ol>
           </div>
@@ -55,6 +63,7 @@ class AgentPage extends React.Component {
                 allAgents={this.props.allAgents}
                 allVehicles={this.props.allVehicles}
                 allTransactions={this.props.allTransactions}
+                walletBalance={this.props.walletBalance}
               />
               <AgentList allAgents={this.props.allAgents} />
             </div>
@@ -72,21 +81,24 @@ AgentPage.propTypes = {
   allTransactions: PropTypes.shape({}).isRequired,
   fetchAgents: PropTypes.func.isRequired,
   fetchDrivers: PropTypes.func.isRequired,
-  fetchTransactions: PropTypes.func.isRequired
+  fetchTransactions: PropTypes.func.isRequired,
+  getWalletBalanceRequest: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => {
   return {
     allAgents: state.allAgents,
     allVehicles: state.allVehicles,
-    allTransactions: state.allTransactions
+    allTransactions: state.allTransactions,
+    walletBalance: state.walletBalance
   };
 };
 
 const mapDispatchToProps = dispatch => ({
   fetchAgents: () => dispatch(fetchAgents()),
   fetchVehicles: () => dispatch(fetchVehicles()),
-  fetchTransactions: () => dispatch(fetchTransactions())
+  fetchTransactions: () => dispatch(fetchTransactions()),
+  getWalletBalanceRequest: () => dispatch(getWalletBalanceRequest())
 });
 
 export default connect(

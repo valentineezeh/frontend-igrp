@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import moment from "../../../middleware/moment";
+import datetime from 'node-datetime';
 import activateAgent from "../../../actions/activateAgentAction";
 import deactivateAgent from "../../../actions/deactivateAgentAction";
 import agentTransactions from "../../../actions/agentTransactionsAction";
@@ -44,7 +44,7 @@ class SingleAgentOverview extends React.Component {
   onDeleteAgent(event) {
     event.preventDefault();
     this.setState({ isLoading3: true })
-    return this.props.deleteAgentRequest(this.props.singleAgent.phoneNumber);
+    return this.props.deleteAgentRequest(this.props.singleAgent._id);
   }
 
 
@@ -62,46 +62,17 @@ class SingleAgentOverview extends React.Component {
     if (activateStatus) {
       window.location.href = "/agents";
     }
-    if (isLoading1) {
-      return (
-        <div >
-          <IsLoading />
-        </div>
-      )
-    }
 
     if (deactivateStatus) {
       window.location.href = "/agents"
-    }
-    if (isLoading2) {
-      return (
-        <div>
-          <IsLoading />
-        </div>
-      )
     }
 
     if (deleteSuccess) {
       window.location.href = "/agents"
     }
-    if (isLoading3) {
-      return (
-        <div>
-          <IsLoading />
-        </div>
-      )
-    }
 
     if (success) {
       window.location.href = '/agent-transactions'
-    }
-
-    if (isLoading4) {
-      return (
-        <div>
-          <IsLoading />
-        </div>
-      )
     }
 
     return (
@@ -111,15 +82,29 @@ class SingleAgentOverview extends React.Component {
           <div className="panel-heading main-color-bg">
             <div className="row">
               <div className="col-md-4">
-                <Link 
+              {
+                isLoading3 ? (
+                  <Link 
                   id="anchor" 
                   className="btn btn-white" 
                   to="#" 
                   role="button"
                   onClick={this.onDeleteAgent}
                   >
-                  <i className="fas fa-times">{' '}Delete Agent</i>
+                  <i className="fa fa-spinner">{' '}Delete Agent</i>
                 </Link>
+                ): (
+                  <Link 
+                  id="anchor" 
+                  className="btn btn-white" 
+                  to="#" 
+                  role="button"
+                  onClick={this.onDeleteAgent}
+                  >
+                  <i className="far fa-trash-alt">{' '}Delete Agent</i>
+                </Link> 
+                )
+              }
               </div>
 
               <div className="col-md-4">
@@ -139,8 +124,7 @@ class SingleAgentOverview extends React.Component {
                   id="anchor"
                   className="btn  btn-white"
                   role="button"
-                  to="/edit-agent"
-                  
+                  to="/edit-agent" 
                 >
                   <i className="fa fa-edit">Edit agent</i>
                 </Link>
@@ -159,16 +143,12 @@ class SingleAgentOverview extends React.Component {
                 <p>{this.props.singleAgent.phoneNumber}</p>
               </div>
               <div className="form-group col-md-4">
-                <label for="inputPassword4">BVN</label>
-                <p>{this.props.singleAgent.bvn}</p>
-              </div>
-            </div>
-            <div className="form-row">
-              <div className="form-group col-md-4">
                 <label>Address</label>
                 <br />
                 <p>{this.props.singleAgent.address}</p>
               </div>
+            </div>
+            <div className="form-row">
               <div className="form-group col-md-4">
                 <label for="inputEmail4">Email</label>
                 <p>{this.props.singleAgent.email}</p>
@@ -176,13 +156,13 @@ class SingleAgentOverview extends React.Component {
               <div className="form-group col-md-4">
                 <label for="inputEmail4">Age</label>
                 <p>{this.props.singleAgent.age}</p>
-              </div> 
-            </div>
-            <div className="form-row">
+              </div>
             <div className="form-group col-md-4">
                 <label for="inputPassword4">Mean Of Identification</label>
                 <p>{this.props.singleAgent.meansOfId}</p>
               </div>
+            </div>
+            <div className="form-row">
               <div className="form-group col-md-4">
                 <label for="inputPassword4">ID Number</label>
                 <p>{this.props.singleAgent.idNumber}</p>
@@ -190,6 +170,10 @@ class SingleAgentOverview extends React.Component {
               <div className="form-group col-md-4">
                 <label for="inputPassword4">Guarantor Fullname</label>
                 <p>{this.props.singleAgent.guarantorsFullName}</p>
+              </div>
+              <div className="form-group col-md-4">
+                <label for="inputEmail4">Deactivate</label>
+                <p>{convertedStatus}</p>
               </div>
             </div>
             <div className="form-row">
@@ -202,39 +186,65 @@ class SingleAgentOverview extends React.Component {
                 <p>{this.props.singleAgent.guarantorsAddress}</p>
               </div>
               <div className="form-group col-md-4">
-                <label for="inputEmail4">Deactivate</label>
-                <p>{convertedStatus}</p>
+                <label for="inputPassword4">Role</label>
+                <p>{this.props.singleAgent.role}</p>
               </div>
             </div>
             <div className="form-row">
               <div className="form-group col-md-4">
-                <label for="inputPassword4">Role</label>
-                <p>{this.props.singleAgent.role}</p>
-              </div>
-              <div className="form-group col-md-4">
                 <label for="inputPassword4">Date Joined</label>
-                <p>{moment(this.props.singleAgent.date).format("MM-DD-YY")}</p>
+                <p>{datetime.create(this.props.singleAgent.date).format('m/d/y')}</p>
               </div>
             </div>
           </div>
           <div className="panel-heading main-color-bg-foot ">
+            <div className="container">
+            <div className="row">
+            <div className="col-md-12">
             <div id="activate">
-              <button
+            {
+              isLoading1 ? (
+                <button
+                className="btn btn-danger btn-text"
+                type="submit"
+                onClick={this.onActivate}
+              >
+                <i className="fa fa-spinner">{'  '}Activate</i>
+              </button>
+              ):(
+                <button
                 className="btn btn-danger btn-text"
                 type="submit"
                 onClick={this.onActivate}
               >
                 <i className="fa fa-check">Activate</i>
               </button>
+              )
+            }
             </div>
             <div id="deactivate">
-              <button
+            {
+              isLoading2 ? (
+                <button
+                className="btn btn-danger btn-text"
+                type="submit"
+                onClick={this.onDeactivate}
+              >
+                <i className="fa fa-spinner">{'  '}De-activate</i>
+              </button>
+              ): (
+                <button
                 className="btn btn-danger btn-text"
                 type="submit"
                 onClick={this.onDeactivate}
               >
                 <i className="fa fa-times"> De-activate</i>
               </button>
+              )
+            }
+            </div>
+            </div>
+            </div>
             </div>
           </div>
         </div>
@@ -257,7 +267,9 @@ const mapStateToProps = state => {
     deactivateStatus: state.agentDeactivateRequest.status,
     agentTransactions: state.singleAgentAllTransaction,
     success: state.singleAgentAllTransaction.success,
-    deleteSuccess: state.deleteAgent.deleteSuccess
+    deleteSuccess: state.deleteAgent.deleteSuccess,
+    ninDetails: state.confirmNinRequest.confirmNin.ResponseNIMC,
+    bvnDetails: state.confirmBvn.confirmBvn.ResponseBVNDetails,
   };
 };
 

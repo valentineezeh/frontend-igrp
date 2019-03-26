@@ -5,9 +5,7 @@ import PropTypes from "prop-types";
 import isEmpty from 'is-empty';
 import TextField from "../../commons/TextField.jsx";
 import validateInput from "../../../middleware/agentInputValidate";
-import SubmitButton from "../../commons/SubmitButton.jsx";
 import agentRequest, { deleteErrorMessages } from "../../../actions/postAgentsAction";
-import IsLoading from '../../commons/IsLoading.jsx';
 import ErrorAlertNotification from '../../commons/ErrorAlertNotification.jsx';
 
 /**
@@ -22,7 +20,6 @@ class AgentForm extends React.Component {
       address: "",
       age: "",
       phoneNumber: "",
-      bvn: "",
       password: "",
       meansOfId: 'sample',
       guarantorsFullName: '',
@@ -32,6 +29,17 @@ class AgentForm extends React.Component {
       errors: {},
       isLoading: false,
     };
+    if(this.props.bvnDetails){
+      this.state.fullname = this.props.bvnDetails.FirstName + ' ' + this.props.bvnDetails.LastName
+      this.state.phoneNumber = this.props.bvnDetails.PhoneNumber
+    }
+    if(this.props.ninDetails){
+      this.state.fullname = this.props.ninDetails.firstname + ' ' + this.props.ninDetails.surname
+      this.state.email = this.props.ninDetails.email;
+      this.state.address = this.props.ninDetails.nok_address1
+      this.state.phoneNumber = this.props.ninDetails.telephoneno
+    }
+
     this.onSubmit = this.onSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
@@ -98,7 +106,6 @@ class AgentForm extends React.Component {
       email,
       address,
       fullname,
-      bvn,
       age,
       meansOfId,
       guarantorsFullName,
@@ -118,7 +125,7 @@ class AgentForm extends React.Component {
 
     const agentForm = (
       <div>
-        <div class="col-md-9">
+        <div class="col-md-9" id="transaction">
           <div class="panel panel-default">
             <div class="panel-heading main-color-bg">
               <h3 class="panel-title">Create Agents</h3>
@@ -202,18 +209,6 @@ class AgentForm extends React.Component {
                       placeholder="Age"
                     />
                   </div>
-                  <div class="form-group col-md-4">
-                    <label>BVN *</label>
-                    <TextField
-                      error={errors.bvn}
-                      onChange={this.onChange}
-                      value={bvn}
-                      field="bvn"
-                      type="password"
-                      className="mybvn"
-                      placeholder="BVN"
-                    />
-                  </div>
                 </div>
 
                 <div class="form-row">
@@ -230,7 +225,7 @@ class AgentForm extends React.Component {
                     />
                   </div>
                   <div class="form-group col-md-4">
-                    <label>Guarantor Address</label>
+                    <label>Guarantor Address *</label>
                     <TextField
                       error={errors.guarantorsAddress}
                       onChange={this.onChange}
@@ -244,7 +239,7 @@ class AgentForm extends React.Component {
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-4">
-                    <label>Guarantor Fullname</label>
+                    <label>Guarantor Fullname *</label>
                     <TextField
                       error={errors.guarantosrFullName}
                       onChange={this.onChange}
@@ -256,7 +251,7 @@ class AgentForm extends React.Component {
                     />
                   </div>
                   <div class="form-group col-md-4">
-                    <label>Guarantor Phone Number</label>
+                    <label>Guarantor Phone Number *</label>
                     <TextField
                       error={errors.guarantorsPhonenumber}
                       onChange={this.onChange}
@@ -349,7 +344,7 @@ AgentForm.contextTypes = {
 
 const mapStateToProps = state => ({
   status: state.postAgent.status,
-  error: state.postAgent.error
+  error: state.postAgent.error,
 });
 
 export default connect(

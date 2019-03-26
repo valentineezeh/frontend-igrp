@@ -5,7 +5,7 @@ class FooterBar extends React.Component {
     return (
       <div className="footer">
       <footer>
-         <p>&copy; Copyright 2019 OSM_FINC</p>
+         <p>&copy; Copyright 2019 OSM-FINC</p>
       </footer>
  </div>
     );

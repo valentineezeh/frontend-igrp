@@ -1,33 +1,85 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import Cookie from 'cookies-js';
-import moment from "../../../middleware/moment";
+import datetime from 'node-datetime';
 import fetchSingleVehicle from '../../../actions/getSingleVehicleAction';
+import deleteVehicleRequest from '../../../actions/deleteVehicleAction';
 
 class SingleVehicleOverview extends React.Component {
   constructor(props) {
     super(props);
+    this.onEditVehicle = this.onEditVehicle.bind(this);
+    this.onDeleteVehicle = this.onDeleteVehicle.bind(this);
   }
 
   componentDidMount(){
     const vrtID = Cookie.get('vrtID');
-    const { fetchSingleVehicle } = this.props;
-    fetchSingleVehicle(vrtID);
-
+    const { FetchSingleVehicle } = this.props;
+    FetchSingleVehicle(vrtID);
   }
+
+  onEditVehicle() {
+    window.location.href = "/edit-vehicle"
+  }
+
+  onDeleteVehicle() {
+    const { singleVehicle, DeleteVehicleRequest  } = this.props;
+    console.log('>>>: ', singleVehicle._id)
+    const vehicleId = singleVehicle._id
+    DeleteVehicleRequest(vehicleId);
+  }
+
   render() {
-    // const convertedStatus = "" + agentStatus;
-    const { singleVehicle } = this.props;
+    const { singleVehicle, status } = this.props;
     const converted = '' + singleVehicle.deactivate
+
+    if(status){
+      window.location.href = "/vehicles"
+    }
 
     return (
       <div className="col-md-9" id="singleagentoverview">
         <div className="panel-heading" />
         <div className="panel panel-default">
           <div className="panel-heading main-color-bg">
-          <h3 className="panel-title">Single Vehicle</h3>
+          <div className="row">
+            <div className="col-md-4">
+            <a
+            id="anchor"
+            className="btn btn-white"
+            href="#"
+            role="button"
+            >
+            <i className="fas fa-shuttle-van" />{'  '}
+            Single Vehicle
+            </a>
+            </div>
+            <div className="col-md-4">
+            <Link
+            id="anchor"
+            className="btn btn-white"
+            to="/vehicle-trips"
+            role="button"
+            >
+            <i className="fas fa-bus" />{'  '}
+            View Trips
+            </Link>
+            </div>
+            <div className="col-md-4">
+            <Link
+            id="anchor"
+            className="btn btn-white"
+            to="#"
+            role="button"
+            onClick={this.onDeleteVehicle}
+            >
+            <i className="fas fa-trash" />{'  '}
+            Delete Vehicle
+            </Link>
+            </div>
+          </div>
           </div>
           <div className="panel-body">
 
@@ -103,12 +155,27 @@ class SingleVehicleOverview extends React.Component {
               </div>
               <div className="form-group col-md-4">
                 <label for="inputPassword4">Time of Transaction</label>
-                <p>{moment(singleVehicle.timeOfTransaction).format("HH:mm:ss")}</p>
+                <p>{
+                  datetime.create(singleVehicle.timeOfTransaction).format('H/M/S')}</p>
               </div>
               <div className="form-group col-md-4">
                 <label for="inputPassword4">Date</label>
-                <p>{moment(singleVehicle.date).format("MM-DD-YY")}</p>
+                <p>{
+                  datetime.create(singleVehicle.date).format('m/d/y')}</p>
               </div>
+            </div>
+            
+            <div className="text-center">
+            <hr />
+            <Link
+                    to="/edit-vehicle"
+                    className="btn btn-danger"
+                    role="button"
+                    id="anchor"
+                  >
+                      {' '}
+                      Edit Vehicle
+                  </Link>
             </div>
           </div>
         </div>
@@ -123,12 +190,18 @@ SingleVehicleOverview.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    singleVehicle: state.singleVehicleRequest.singleVehicle
+    singleVehicle: state.singleVehicleRequest.singleVehicle,
+    status: state.deleteVehicle.deleteSuccess
   };
 };
+
+const mapDispatchToProps = dispatch => ({
+  FetchSingleVehicle: vrtID => dispatch(fetchSingleVehicle(vrtID)),
+  DeleteVehicleRequest: vehicleId => dispatch(deleteVehicleRequest(vehicleId))
+})
 
 
 export default connect(
   mapStateToProps,
-  { fetchSingleVehicle }
+  mapDispatchToProps
 )(SingleVehicleOverview);

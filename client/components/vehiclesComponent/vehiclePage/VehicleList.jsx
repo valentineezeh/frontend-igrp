@@ -4,7 +4,7 @@ import VehicleRow from "./VehicleRows.jsx";
 class VehicleList extends React.Component {
   render() {
     return (
-      <div class="col-md-9">
+      <div class="col-md-9" id="transaction">
         <div class="panel panel-default">
           <div class="panel-heading main-color-bg">
             <h3 class="panel-title">All Vehicles</h3>
@@ -16,7 +16,7 @@ class VehicleList extends React.Component {
                   <tr>
                     <th scope="col">Phone</th>
                     <th scope="col">Vehicle Type</th>
-                    <th scope="col">Vehicle Number</th>
+                    <th scope="col">VRT ID</th>
                     <th scope="col">Role</th>
                     <th scope="col">Status</th>
                     <th scope="col">Joined</th>

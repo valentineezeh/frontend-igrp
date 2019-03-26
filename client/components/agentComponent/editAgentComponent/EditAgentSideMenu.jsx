@@ -6,6 +6,7 @@ class EditAgentSideMenu extends React.Component {
     const { agents } = this.props.allAgents;
     const vehicleLength = this.props.allVehicles.length;
     const transactionLength = this.props.allTransactions.length;
+    const { totalAmount } = this.props.walletBalance;
     return (
       <div>
         <div class="col-md-3">
@@ -23,7 +24,7 @@ class EditAgentSideMenu extends React.Component {
               <span className="badge">{agents.length}</span>
             </Link>
 
-            <Link to="/drivers" className="list-group-item">
+            <Link to="/vehicles" className="list-group-item">
               <i className="fas fa-truck" /> Vehicles{" "}
               <span className="badge">{vehicleLength}</span>
             </Link>
@@ -31,6 +32,11 @@ class EditAgentSideMenu extends React.Component {
             <Link to="transactions" className="list-group-item">
               <i class="far fa-newspaper" /> Transactions
               <span className="badge">{transactionLength}</span>
+            </Link>
+
+            <Link to="#" className="list-group-item">
+              <i class="fas fa-wallet" /> Wallet
+              <span className="badge">{`NGN `}{totalAmount}</span>
             </Link>
           </div>
         </div>

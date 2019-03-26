@@ -7,6 +7,7 @@ import TransactionList from "./TransactionList.jsx";
 import fetchAgents, { fetchAgentsMessage } from "../../actions/agentsAction";
 import fetchVehicles from "../../actions/vehiclesAction";
 import fetchTransactions from "../../actions/transactionsAction";
+import getWalletBalanceRequest from '../../actions/walletActions/getWalletBalance';
 
 class Transactions extends React.Component {
   componentDidMount() {
@@ -14,6 +15,7 @@ class Transactions extends React.Component {
     this.props.fetchAgents();
     this.props.fetchVehicles();
     this.props.fetchTransactions();
+    this.props.getWalletBalanceRequest()
   }
 
   render() {
@@ -49,6 +51,7 @@ class Transactions extends React.Component {
                 allAgents={this.props.allAgents}
                 allDrivers={this.props.allVehicles}
                 allTransactions={this.props.allTransactions}
+                walletBalance={this.props.walletBalance}
               />
               <TransactionList
                 allTransactions={this.props.allTransactions}
@@ -69,18 +72,20 @@ Transactions.propTypes = {
   fetchAgents: PropTypes.func.isRequired,
   fetchVehicles: PropTypes.func.isRequired,
   fetchAgentsMessage: PropTypes.func.isRequired,
-  fetchTransactions: PropTypes.func.isRequired
+  fetchTransactions: PropTypes.func.isRequired,
+  getWalletBalanceRequest: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => {
   return {
     allAgents: state.allAgents,
     allVehicles: state.allVehicles,
-    allTransactions: state.allTransactions
+    allTransactions: state.allTransactions,
+    walletBalance: state.walletBalance
   };
 };
 
 export default connect(
   mapStateToProps,
-  { fetchAgents, fetchVehicles, fetchTransactions, fetchAgentsMessage }
+  { fetchAgents, fetchVehicles, fetchTransactions, fetchAgentsMessage, getWalletBalanceRequest }
 )(Transactions);

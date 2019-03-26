@@ -36,7 +36,7 @@ module.exports = {
         fs: 'empty',
     },
     output: {
-        path: path.resolve(__dirname, 'client'),
+        path: path.resolve(__dirname, 'server', 'client'),
         filename: '[hash].min.js',
         publicPath: '/'
     },

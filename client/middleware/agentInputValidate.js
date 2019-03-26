@@ -47,13 +47,6 @@ export default function validateInput(data){
         errors.age = 'This field can not be blank';
     }
 
-    if(data.bvn == ''){
-        errors.bvn = 'This field is required';
-    }
-    if (!data.bvn || data.bvn.trim().length === 0) {
-        errors.bvn = 'This field can not be blank';
-    }
-
     return{
         errors,
         isValid: isEmpty(errors)

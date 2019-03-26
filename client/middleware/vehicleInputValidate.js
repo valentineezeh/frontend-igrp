@@ -3,12 +3,6 @@ import isEmpty from 'is-empty';
 
 export default function validateInput(data){
     let errors = {};
-    if(data.driversLicence == ''){
-        errors.driversLicence = 'This field is required';
-    }
-    if (!data.driversLicence|| data.driversLicence.trim().length === 0) {
-        errors.driversLicence = 'This field can not be blank';
-    }
     if(data.phoneNumber == ''){
         errors.phoneNumber = 'This field is required';
     }
@@ -83,6 +77,10 @@ export default function validateInput(data){
     }
     if (!data.vrtID || data.vrtID.trim().length === 0) {
         errors.vrtID = 'This field can not be blank';
+    }
+
+    if(data.vrtID.length != 4){
+        errors.vrtID = 'The VRT ID should be 4 digits.';
     }
 
     if(data.RoadWorthinessExpDate == ''){

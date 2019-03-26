@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import moment from "../../../middleware/moment";
+import datetime from 'node-datetime';
 import fetchSingleAgent, {
   fetchSingleAgentMessage
 } from "../../../actions/getSingleAgentAction";
@@ -26,6 +26,8 @@ class AgentsRow extends React.Component {
 
   render() {
     const agentProps = this.props.agents;
+    const { isLoading } = this.state
+    const convertStatusToString = '' + agentProps.deactivate
 
     const { status } = this.props;
 
@@ -40,16 +42,27 @@ class AgentsRow extends React.Component {
           {0}
           {agentProps.phoneNumber}
         </td>
-        <td>{agentProps.deactivate.toString()}</td>
-        <td>{moment(agentProps.date).format("MM-DD-YY")}</td>
+        <td>{convertStatusToString}</td>
+        <td>{datetime.create(agentProps.date).format('m/d/y')}</td>
         <td>
-          <button
+          {
+            isLoading ? (
+            <button
             type="button"
             class="btn btn-danger"
-            onClick={this.onGetSingleAgent}
           >
-            <i className="fa fa-eye" />
+            <i className="fa fa-spinner fa-spin" />
           </button>
+            ): (
+              <button
+              type="button"
+              class="btn btn-danger"
+              onClick={this.onGetSingleAgent}
+            >
+              <i className="fa fa-eye" />
+            </button>
+            )
+          }
         </td>
       </tr>
     );

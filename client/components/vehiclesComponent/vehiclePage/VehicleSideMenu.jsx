@@ -6,6 +6,8 @@ class VehicleSideMenu extends React.Component {
     const { agents } = this.props.allAgents;
     const vehicleLength = this.props.allVehicles.length;
     const transactionLength = this.props.allTransactions.length;
+    const { totalAmount } = this.props.walletBalance;
+
     return (
       <div>
         <div class="col-md-3">
@@ -28,6 +30,11 @@ class VehicleSideMenu extends React.Component {
             <Link to="/transactions" className="list-group-item">
               <i class="far fa-newspaper" /> Transactions
               <span className="badge">{transactionLength}</span>
+            </Link>
+
+            <Link to="transactions" className="list-group-item">
+              <i class="fas fa-wallet" /> Wallet
+              <span className="badge">{`NGN `}{totalAmount}</span>
             </Link>
           </div>
         </div>

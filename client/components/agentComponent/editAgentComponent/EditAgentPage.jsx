@@ -7,6 +7,7 @@ import fetchVehicles from '../../../actions/vehiclesAction';
 import fetchTransactions from '../../../actions/transactionsAction';
 import EditAgentSideMenu from '../editAgentComponent/EditAgentSideMenu.jsx';
 import EditAgentForm from './EditAgentForm.jsx';
+import getWalletBalanceRequest from '../../../actions/walletActions/getWalletBalance';
 
 class EditAgentPage extends Component {
 
@@ -14,6 +15,7 @@ componentDidMount() {
     this.props.fetchAgents()
     this.props.fetchVehicles();
     this.props.fetchTransactions();
+    this.props.getWalletBalanceRequest();
     }
     render() {
         const editAgentPage = (
@@ -45,6 +47,7 @@ componentDidMount() {
                 allAgents={this.props.allAgents}
                 allVehicles={this.props.allVehicles}
                 allTransactions={this.props.allTransactions}
+                walletBalance={this.props.walletBalance}
               />
               <EditAgentForm />
             </div>
@@ -62,21 +65,24 @@ EditAgentPage.propTypes = {
     allTransactions: PropTypes.shape({}).isRequired,
     fetchAgents: PropTypes.func.isRequired,
     fetchVehicles: PropTypes.func.isRequired,
-    fetchTransactions: PropTypes.func.isRequired
+    fetchTransactions: PropTypes.func.isRequired,
+    getWalletBalanceRequest: PropTypes.func.isRequired,
   };
 
 const mapStateToProps = state => {
     return {
       allAgents: state.allAgents,
       allVehicles: state.allVehicles,
-      allTransactions: state.allTransactions
+      allTransactions: state.allTransactions,
+      walletBalance: state.walletBalance
     };
   };
 
 const mapDispatchToProps = dispatch => ({
     fetchAgents: () => dispatch(fetchAgents()),
     fetchVehicles: () => dispatch(fetchVehicles()),
-    fetchTransactions: () => dispatch(fetchTransactions())
+    fetchTransactions: () => dispatch(fetchTransactions()),
+    getWalletBalanceRequest: () => dispatch(getWalletBalanceRequest())
   });
 
 export default connect(

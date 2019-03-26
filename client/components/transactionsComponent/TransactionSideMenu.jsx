@@ -6,6 +6,7 @@ class TransactionSideMenu extends React.Component {
     const { agents } = this.props.allAgents;
     const driverLength = this.props.allDrivers.length;
     const transactionLength = this.props.allTransactions.length;
+    const { totalAmount } = this.props.walletBalance;
     return (
       <div>
         <div class="col-md-3">
@@ -31,6 +32,11 @@ class TransactionSideMenu extends React.Component {
             <Link to="transactions" className="list-group-item">
               <i class="far fa-newspaper" /> Transactions
               <span className="badge">{transactionLength}</span>
+            </Link>
+            
+            <Link to="transactions" className="list-group-item">
+              <i class="fas fa-wallet" /> Wallet
+              <span className="badge">{`NGN `}{totalAmount}</span>
             </Link>
           </div>
         </div>

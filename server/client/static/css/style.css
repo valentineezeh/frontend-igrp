@@ -1,0 +1,354 @@
+body {
+  background: #f4f4f4;
+  height: 100%;
+}
+
+.footer {
+  z-index: 1;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #161212;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+#anchor:hover {
+    background-color: rgb(44, 2, 2);
+}
+
+
+#transaction {
+  margin-bottom: 100px;
+}
+
+#loading-center {
+  margin-top: 20%;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+}
+
+/* drop dwon menu */
+#dropdown {
+  float: left;
+  overflow: hidden;
+  margin-top: 5px;
+}
+
+#dropdown #dropbtn {
+  font-size: 14px;  
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+
+/* #dropdown:hover #dropbtn {
+  background-color: red;
+} */
+
+#dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+#dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+#dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+#dropdown:hover #dropdown-content {
+  display: block;
+}
+
+/* The hero image */
+.hero-image {
+  /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../../components/images/1.jpg");
+
+  /* Set a specific height */
+  height: 100%;
+
+  /* Position and center the image to scale nicely on all screens */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+#formButton {
+  color: #c0392b
+}
+
+
+
+@keyframes load {
+  0% { transform: rotate(0); }
+  100% { transform: rotate(360deg); }
+}
+/* Navbar */
+.navbar {
+  min-height: 33px !important;
+  margin-bottom: 0;
+  border-radius: 0;
+  font-family: inherit;
+}
+
+.navbar-nav > li > a,
+.navbar-brand {
+  padding-top: 6px !important;
+  padding-bottom: 0 !important;
+  height: 33px;
+}
+
+.navbar-default {
+  background-color: #e74c3c;
+  border-color: #c0392b;
+}
+.navbar-default .navbar-brand {
+  color: #ecf0f1;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+  color: #ffbbbc;
+}
+.navbar-default .navbar-text {
+  color: #ecf0f1;
+}
+.navbar-default .navbar-nav > li > a {
+  color: #ecf0f1;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+  color: #ffbbbc;
+}
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+  color: #ffbbbc;
+  background-color: #c0392b;
+}
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+  color: #ffbbbc;
+  background-color: #c0392b;
+}
+.navbar-default .navbar-toggle {
+  border-color: #c0392b;
+}
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+  background-color: #c0392b;
+}
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: #ecf0f1;
+}
+.navbar-default .navbar-collapse,
+.navbar-default .navbar-form {
+  border-color: #ecf0f1;
+}
+.navbar-default .navbar-link {
+  color: #ecf0f1;
+}
+.navbar-default .navbar-link:hover {
+  color: #ffbbbc;
+}
+
+/* Custom */
+.main-color-bg {
+  background-color: #e74c3c !important;
+  border-color: #c0392b !important;
+  color: #ffffff !important;
+}
+
+/* Header */
+#header {
+  background: #333333;
+  color: #ffffff;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+#header .create {
+  padding-top: 20px;
+}
+
+#anchor {
+  color: whitesmoke;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* Breadcrumb */
+.breadcrumb {
+  background: #cccccc;
+  color: #333333;
+}
+
+.breadcrumb a {
+  color: #333333;
+}
+
+/* Progress Bars */
+.progress-bar {
+  background: #333333;
+  color: #ffffff;
+}
+
+.dash-box {
+  text-align: center;
+}
+
+#login {
+  margin-top: 30px;
+}
+
+.agent-style {
+  margin-top: 15px;
+}
+
+#activate {
+  display: inline;
+}
+
+#idNumber {
+  margin-left: 5%;
+}
+
+.separator{
+  position: relative;
+  text-align: center;
+}
+
+.separator label{
+  background-color:#fff;
+  margin-top: 20px;
+  padding: 0 0.4em;
+  font-size: 30px;
+  position: relative;
+}
+
+.separator:before{
+  content: '';
+  border-style: solid;
+  border-width: 0 0 1px 0;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  /* width: 100%; */
+  border-color:black;
+}
+
+#singleagentoverview {
+  margin-top: -20px;
+  margin-bottom: 100px;
+}
+
+#editvehicle {
+  margin-bottom: 100px;
+}
+
+#deactivate {
+  display: inline;
+  margin-left: 50%;
+}
+
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+.login-page {
+  width: 360px;
+  padding: 8% 0 0;
+  margin: auto;
+}
+.form {
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 360px;
+  margin: 0 auto 100px;
+  padding: 45px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+.form input {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  margin-top: 10px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+.form button {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  border: 0;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+.form button:hover,.form button:active,.form button:focus {
+  background: rgb(230, 71, 32);
+}
+.form .message {
+  margin: 15px 0 0;
+  color: #b3b3b3;
+  font-size: 12px;
+}
+.form .message a {
+  color: #c0392b;
+  text-decoration: none;
+}
+.form .register-form {
+  display: none;
+}
+
+/* Footer */
+.mainfooter {
+  background: #333333;
+  color: #ffffff;
+  text-align: center;
+  padding: 30px;
+}
+
+
+@media (max-width: 767px) {
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+    color: #ecf0f1;
+  }
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+    color: #ffbbbc;
+  }
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+    color: #ffbbbc;
+    background-color: #c0392b;
+  }
+}

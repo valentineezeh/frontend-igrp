@@ -11,6 +11,21 @@ import agentDeactivateRequest from './deactivateAgent';
 import singleAgentAllTransaction from './agentTransactions';
 import deleteAgent from './deleteAgent';
 import singleVehicleRequest from './getSingleVehicle';
+import updateAgent from './updateAgent';
+import updateVehicle from './updateVehicle';
+import allVehicleTrips from './getVehicleTrips';
+import confirmBvn from './confirmBvn';
+import confirmNinRequest from './confirmNin';
+import activateWallet from './walletReducers/activateWallet';
+import resetWalletPasscode from './walletReducers/resetWalletCode';
+import walletBalance from './walletReducers/getWalletBalance';
+import recoverWalletCode from './walletReducers/recoverWalletCode';
+import sendMoneyToWallet from './walletTransactionsReducers/sendMoney';
+import transactionHistory from './walletTransactionsReducers/transactionHistory';
+import allBanks from './walletTransactionsReducers/getAllBanks';
+import bankFundTransfer from './walletTransactionsReducers/transferFundFromWalletToBank';
+import creditWallet from './walletTransactionsReducers/creditWallet';
+import deleteVehicle from './deleteVehicle';
 
 export default combineReducers({
     auth,
@@ -24,5 +39,20 @@ export default combineReducers({
     agentDeactivateRequest,
     singleAgentAllTransaction,
     deleteAgent,
-    singleVehicleRequest
+    singleVehicleRequest,
+    updateAgent,
+    updateVehicle,
+    allVehicleTrips,
+    confirmBvn,
+    confirmNinRequest,
+    activateWallet,
+    resetWalletPasscode,
+    walletBalance,
+    recoverWalletCode,
+    sendMoneyToWallet,
+    transactionHistory,
+    allBanks,
+    bankFundTransfer,
+    creditWallet,
+    deleteVehicle
 });

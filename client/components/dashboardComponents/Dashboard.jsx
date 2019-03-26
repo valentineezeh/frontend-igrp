@@ -6,15 +6,16 @@ import DashboardOverview from "./Overview.jsx";
 import fetchAgents from "../../actions/agentsAction";
 import fetchVehicles from "../../actions/vehiclesAction";
 import fetchTransactions from "../../actions/transactionsAction";
+import getWalletBalanceRequest from '../../actions/walletActions/getWalletBalance';
 
 class Dashboard extends React.Component {
   componentDidMount() {
     this.props.fetchVehicles();
-    this.props.fetchTransactions();
-  }
-  componentWillMount() {
     this.props.fetchAgents();
+    this.props.fetchTransactions();
+    this.props.getWalletBalanceRequest();
   }
+
   render() {
     const dashboard = (
       <div>
@@ -48,11 +49,11 @@ class Dashboard extends React.Component {
                 allAgents={this.props.allAgents}
                 allDrivers={this.props.allVehicles}
                 allTransactions={this.props.allTransactions}
+                walletBalance={this.props.walletBalance}
               />
               <DashboardOverview
                 allAgents={this.props.allAgents}
-                allDrivers={this.props.allVehicles}
-                allTransactions={this.props.allTransactions}
+                walletBalance={this.props.walletBalance}
               />
             </div>
           </div>
@@ -69,18 +70,20 @@ Dashboard.propTypes = {
   allTransactions: PropTypes.array.isRequired,
   fetchAgents: PropTypes.func.isRequired,
   fetchVehicles: PropTypes.func.isRequired,
-  fetchTransactions: PropTypes.func.isRequired
+  fetchTransactions: PropTypes.func.isRequired,
+  getWalletBalanceRequest: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => {
   return {
     allAgents: state.allAgents,
     allVehicles: state.allVehicles,
-    allTransactions: state.allTransactions
+    allTransactions: state.allTransactions,
+    walletBalance: state.walletBalance
   };
 };
 
 export default connect(
   mapStateToProps,
-  { fetchAgents, fetchVehicles, fetchTransactions }
+  { fetchAgents, fetchVehicles, fetchTransactions, getWalletBalanceRequest }
 )(Dashboard);

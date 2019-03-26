@@ -1,11 +1,10 @@
 import React from "react";
 import LatestAgent from "./LatestAgent.jsx";
+import walletBalance from '../../reducers/walletReducers/getWalletBalance';
 
 class DashboardOverview extends React.Component {
   render() {
-    const { agents } = this.props.allAgents;
-    const driverLength = this.props.allDrivers.length;
-    const transactionLength = this.props.allTransactions.length;
+    const { totalAmount } = this.props.walletBalance;
     return (
       <div className="col-md-9">
         <div className="panel panel-default">
@@ -13,28 +12,12 @@ class DashboardOverview extends React.Component {
             <h3 className="panel-title">IGR-Transport Overview</h3>
           </div>
           <div className="panel-body">
-            <div className="col-md-4">
+            <div className="col-md-12">
               <div className="well dash-box">
                 <h2>
-                  <i className="fas fa-users" /> {agents.length}
+                  <i className="fas fa-wallet" /> {`NGN`} { totalAmount }
                 </h2>
-                <h4>Agents</h4>
-              </div>
-            </div>
-            <div className="col-md-4">
-              <div className="well dash-box">
-                <h2>
-                  <i className="far fa-newspaper" /> {transactionLength}
-                </h2>
-                <h4>Transactions</h4>
-              </div>
-            </div>
-            <div className="col-md-4">
-              <div className="well dash-box">
-                <h2>
-                  <i className="fas fa-truck" /> {driverLength}
-                </h2>
-                <h4>Vehicles</h4>
+                <h4>Wallet</h4>
               </div>
             </div>
           </div>

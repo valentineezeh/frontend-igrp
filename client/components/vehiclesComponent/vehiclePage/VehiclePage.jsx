@@ -7,12 +7,14 @@ import VehicleList from "./VehicleList.jsx";
 import fetchAgents from "../../../actions/agentsAction";
 import fetchVehicles from "../../../actions/vehiclesAction";
 import fetchTransactions from "../../../actions/transactionsAction";
+import getWalletBalanceRequest from '../../../actions/walletActions/getWalletBalance';
 
 class VehiclePage extends React.Component {
   componentDidMount() {
     this.props.fetchAgents();
     this.props.fetchVehicles();
     this.props.fetchTransactions();
+    this.props.getWalletBalanceRequest();
   }
   render() {
     const driverDashboard = (
@@ -41,9 +43,9 @@ class VehiclePage extends React.Component {
               </li>
               <li>
                 {" "}
-                <Link className="btn btn-danger btn-sm " to="create-driver">
+                <a className="btn btn-danger btn-sm " href="/create-vehicle">
                   Create Vehicle
-                </Link>
+                </a>
               </li>
             </ol>
           </div>
@@ -55,11 +57,10 @@ class VehiclePage extends React.Component {
                 allAgents={this.props.allAgents}
                 allVehicles={this.props.allVehicles}
                 allTransactions={this.props.allTransactions}
+                walletBalance={this.props.walletBalance}
               />
               <VehicleList
-                allAgents={this.props.allAgents}
                 allVehicles={this.props.allVehicles}
-                allTransactions={this.props.allTransactions}
               />
             </div>
           </div>
@@ -76,18 +77,20 @@ VehiclePage.propTypes = {
   allTransactions: PropTypes.array.isRequired,
   fetchAgents: PropTypes.func.isRequired,
   fetchDrivers: PropTypes.func.isRequired,
-  fetchTransactions: PropTypes.func.isRequired
+  fetchTransactions: PropTypes.func.isRequired,
+  getWalletBalanceRequest: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => {
   return {
     allAgents: state.allAgents,
     allVehicles: state.allVehicles,
-    allTransactions: state.allTransactions
+    allTransactions: state.allTransactions,
+    walletBalance: state.walletBalance
   };
 };
 
 export default connect(
   mapStateToProps,
-  { fetchAgents, fetchVehicles, fetchTransactions }
+  { fetchAgents, fetchVehicles, fetchTransactions, getWalletBalanceRequest }
 )(VehiclePage);

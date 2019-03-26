@@ -9,8 +9,8 @@ export const deleteAgent = DeleteAgent => ({
     DeleteAgent
 });
 
-const deleteAgentRequest = phoneNumber => dispatch => {
-    axios.delete(`${config.apiUrl}${routes.DELETEAGENT}/${phoneNumber}`).then(response => {
+const deleteAgentRequest = deleteAgentId => dispatch => {
+    axios.delete(`${config.apiUrl}${routes.DELETEAGENT}/${deleteAgentId}`).then(response => {
         const { message } = response.data;
         dispatch(deleteAgent(response.data.data));
         toastr.success(message);

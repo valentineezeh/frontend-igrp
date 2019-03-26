@@ -65,14 +65,40 @@ class UserNavigation extends React.Component {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/agents">Agents</Link>
+                  <a href="/agents">Agents</a>
                 </li>
                 <li>
                   <Link to="/vehicles">Vehicles</Link>
                 </li>
-                <li>
-                  <Link to="/transactions">Transactions</Link>
-                </li>
+                <li >
+                  <div id="dropdown">
+                <a id="dropbtn" style={{textDecoration: "none"}}>Transactions{'  '}
+                  <i class="fa fa-caret-down"></i>
+               </a>
+                <div id="dropdown-content">
+                <Link to="/transactions">All Transactions</Link>
+                  <Link to="/send-money-wallet">Send Money To Wallet</Link>
+                  <Link to="/bank-fund-transfer">Wallet to Bank Transfer</Link>
+                  <Link to="/credit-wallet">Credit Wallet from Bank</Link>
+                  <Link to="/verify-bank-details">Verify Account Number</Link>
+                  <Link to="/transactions-history">Transactions History</Link>
+                </div>
+                </div>
+             </li>
+                {/* drop down menu */}
+                <li >
+                  <div id="dropdown">
+                <a id="dropbtn" style={{textDecoration: "none"}}>Wallet{'  '}
+                  <i class="fa fa-caret-down"></i>
+               </a>
+                <div id="dropdown-content">
+                  <Link to="/activate-wallet">Activate Wallet</Link>
+                  <Link to="/reset-wallet-code">Reset Wallet Code</Link>
+                  <Link to="/recover-wallet-code">Recover Wallet Code</Link>
+                </div>
+                </div>
+             </li>
+             {/* drop down menu */}
               </ul>
               <ul className="nav navbar-nav navbar-right">
                 <li>
